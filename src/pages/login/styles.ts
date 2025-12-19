@@ -4,15 +4,17 @@ export function makeStyles(theme: any) {
   return StyleSheet.create({
     flex: { flex: 1 },
     container: {
-      flexGrow: 1,
-      justifyContent: 'center',
-      paddingHorizontal: theme.spacing.lg || 20,
-      backgroundColor: theme.colors.background || '#fff',
+      // Remove styles - handled by AuthFormLayout
     },
-    inner: { alignItems: 'center', width: '100%' },
+    inner: {
+      // Remove styles - handled by AuthFormLayout
+    },
     title: {
-      fontSize: theme.fontSizes.xl || 24,
-      marginBottom: theme.spacing.lg || 24,
+      fontSize: theme.fontSizes.xxl || 28,
+      fontWeight: 'bold',
+      marginBottom: theme.spacing.xl || 32,
+      color: theme.colors.text.primary,
+      textAlign: 'center',
     },
     rowBetween: {
       flexDirection: 'row',

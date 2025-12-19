@@ -1,10 +1,14 @@
 export { store } from './store';
 export type { RootState, AppDispatch } from './store';
 
-// Re-export slice actions and selectors with namespaces to avoid conflicts
-export * as authActions from './auth/actions';
-export * as userActions from './user/actions';
-export * as appActions from './app/actions';
+// Re-export slice actions with namespaces to avoid conflicts
+import * as authActionsImport from './auth/actions';
+import * as userActionsImport from './user/actions';
+import * as appActionsImport from './app/actions';
+
+export const authActions = authActionsImport;
+export const userActions = userActionsImport;
+export const appActions = appActionsImport;
 
 export * from './auth/selectors';
 export * from './user/selectors';

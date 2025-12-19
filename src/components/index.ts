@@ -1,8 +1,6 @@
-// Primitives
-export { default as Box } from './primitives/Box';
-export { default as Text } from './primitives/Text';
-
 // Atoms
+export { default as Box } from './atoms/Box';
+export { default as Text } from './atoms/Text';
 export { default as Button } from './atoms/Button';
 export { default as LoadingSpinner } from './atoms/LoadingSpinner';
 export { default as Logo } from './atoms/Logo';
@@ -14,3 +12,7 @@ export { default as ErrorToast } from './molecules/ErrorToast';
 
 // Organisms
 export { default as ErrorBoundary } from './organisms/ErrorBoundary';
+
+// Templates
+export { default as AuthFormLayout } from './templates/AuthFormLayout';
+// Add template exports here as you create them

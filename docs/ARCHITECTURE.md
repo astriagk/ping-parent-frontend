@@ -66,16 +66,16 @@ This is a React Native mobile application built with TypeScript, following atomi
 pingParentFrontend/
 ├── src/
 │   ├── components/          # Component library (atomic design)
-│   │   ├── primitives/      # Base building blocks (Box, Text)
-│   │   ├── atoms/           # Simple components (Button, Logo, LoadingSpinner, Input, PasswordInput)
+│   │   ├── atoms/           # Base components (Box, Text, Button, Logo, Input, etc.)
 │   │   ├── molecules/       # Composite components (ErrorToast)
 │   │   ├── organisms/       # Complex components (ErrorBoundary)
+│   │   ├── templates/       # Page-level layouts
 │   │   └── index.ts         # Barrel exports
 │   │
-│   ├── screens/             # Application screens
+│   ├── pages/               # Application pages (Atomic Design)
 │   │   ├── login/
-│   │   │   ├── Login.tsx    # Screen component
-│   │   │   └── styles.ts    # Screen styles (makeStyles factory)
+│   │   │   ├── Login.tsx    # Page component
+│   │   │   └── styles.ts    # Page styles (makeStyles factory)
 │   │   ├── splash/
 │   │   └── home/
 │   │
@@ -124,14 +124,16 @@ pingParentFrontend/
 │   │
 │   ├── hooks/               # Custom React hooks
 │   ├── utils/               # Utility functions
+│   │   ├── storage.ts       # AsyncStorage utilities
+│   │   └── index.ts         # Barrel exports
 │   ├── types/               # TypeScript types
 │   ├── styles/              # Global styles
 │   │
 │   └── stories/             # Storybook stories (mirrors components/)
-│       ├── primitives/
 │       ├── atoms/
 │       ├── molecules/
-│       └── organisms/
+│       ├── organisms/
+│       └── templates/
 │
 ├── assets/                  # Static assets (images, fonts)
 ├── android/                 # Android native code
@@ -223,19 +225,12 @@ function MyComponent() {
 
 ### Atomic Design Hierarchy
 
-**Primitives** (`src/components/primitives/`)
-
-- Most basic building blocks
-- Thin wrappers around React Native components
-- Examples: `Box`, `Text`
-- **When to use**: Need direct access to theme or common base styling
-
 **Atoms** (`src/components/atoms/`)
 
+- Most basic building blocks that can't be broken down further
 - Simple, single-purpose components
-- Cannot be broken down further
-- Examples: `Button`, `Logo`, `LoadingSpinner`, `Input`, `PasswordInput`
-- **When to use**: Reusable UI elements with no complex logic
+- Examples: `Box`, `Text`, `Button`, `Logo`, `LoadingSpinner`, `Input`, `PasswordInput`
+- **When to use**: Reusable UI elements with minimal or no complex logic
 
 **Molecules** (`src/components/molecules/`)
 
@@ -362,7 +357,7 @@ Clean imports using `@` prefixes instead of relative paths.
 | Alias         | Path             | Usage                   |
 | ------------- | ---------------- | ----------------------- |
 | `@components` | `src/components` | UI components           |
-| `@screens`    | `src/screens`    | Screen components       |
+| `@pages`      | `src/pages`      | Page components         |
 | `@store`      | `src/store`      | Redux store             |
 | `@services`   | `src/services`   | API services            |
 | `@theme`      | `src/theme`      | Theme system            |
@@ -450,10 +445,10 @@ function makeStyles(theme: Tokens) {
 
 ### Pattern 3: Colocated Styles File (Screens)
 
-For screens with complex styling:
+For pages with complex styling:
 
 ```
-src/screens/login/
+src/pages/login/
 ├── Login.tsx
 └── styles.ts       # Export makeStyles factory
 ```
@@ -820,6 +815,132 @@ export const API_BASE_URL = Platform.select({
 
 ---
 
+## Utility Functions
+
+### Storage Utilities (`src/utils/storage.ts`)
+
+Centralized AsyncStorage operations with type-safe, consistent key management.
+
+**Features:**
+
+- Centralized storage keys constant
+- Type-safe wrapper functions
+- Built-in error handling
+- Specialized utilities for auth, user data, and preferences
+
+**Storage Keys:**
+
+```typescript
+export const STORAGE_KEYS = {
+  AUTH_TOKEN: 'auth_token',
+  REMEMBER_ME: 'remember_me',
+  USER_DATA: 'user_data',
+  THEME_PREFERENCE: 'theme_preference',
+  LANGUAGE: 'language',
+} as const;
+```
+
+**Generic Functions:**
+
+```typescript
+import { setStorageItem, getStorageItem, removeStorageItem } from '@utils';
+
+// Set item
+await setStorageItem('my_key', 'my_value');
+
+// Get item
+const value = await getStorageItem('my_key');
+
+// Remove item
+await removeStorageItem('my_key');
+
+// Clear all storage
+await clearStorage();
+
+// Multi-operations
+await setMultipleStorageItems([
+  ['key1', 'value1'],
+  ['key2', 'value2'],
+]);
+```
+
+**Auth Storage:**
+
+```typescript
+import { authStorage } from '@utils';
+
+// Set/get/remove token
+await authStorage.setToken(token);
+const token = await authStorage.getToken();
+await authStorage.removeToken();
+
+// Remember me
+await authStorage.setRememberMe(true);
+const rememberMe = await authStorage.getRememberMe();
+
+// Clear all auth data
+await authStorage.clearAuth();
+```
+
+**User Storage:**
+
+```typescript
+import { userStorage } from '@utils';
+
+// Save user data
+await userStorage.setUserData({ id: 1, name: 'John' });
+
+// Get user data
+const userData = await userStorage.getUserData();
+
+// Remove user data
+await userStorage.removeUserData();
+```
+
+**Preferences Storage:**
+
+```typescript
+import { preferencesStorage } from '@utils';
+
+// Theme
+await preferencesStorage.setTheme('dark');
+const theme = await preferencesStorage.getTheme();
+
+// Language
+await preferencesStorage.setLanguage('en');
+const language = await preferencesStorage.getLanguage();
+```
+
+**Benefits:**
+
+- **Consistency**: Single source of truth for storage keys
+- **Type Safety**: TypeScript support throughout
+- **Error Handling**: Built-in try-catch blocks with logging
+- **Maintainability**: Easy to extend with new storage operations
+- **Developer Experience**: Clean, intuitive API
+
+**Usage Example:**
+
+```typescript
+// ✅ Good - Using storage utilities
+import { authStorage } from '@utils';
+
+async function handleLogin(token: string, rememberMe: boolean) {
+  await authStorage.setToken(token);
+  if (rememberMe) await authStorage.setRememberMe(true);
+}
+
+// ❌ Bad - Direct AsyncStorage usage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+async function handleLogin(token: string, rememberMe: boolean) {
+  await AsyncStorage.setItem('auth_token', token);
+  if (rememberMe) await AsyncStorage.setItem('remember_me', '1');
+}
+```
+
+---
+
 ## Best Practices
 
 ### ✅ DO
@@ -930,10 +1051,10 @@ function MyComponent() {
 9. **Test in Storybook** (set `SHOW_STORYBOOK = true` in App.tsx)
 10. **Test in actual app** with real data
 
-### New Screen Checklist
+### New Page Checklist
 
-1. **Create screen folder** (`src/screens/[name]/`)
-2. **Create screen component** (`[Name].tsx`)
+1. **Create page folder** (`src/pages/[name]/`)
+2. **Create page component** (`[Name].tsx`)
 3. **Create styles file** (`styles.ts` with `makeStyles`)
 4. **Use path aliases** for imports
 5. **Add to navigation** (`AppNavigator.tsx`)

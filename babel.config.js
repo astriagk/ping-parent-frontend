@@ -10,7 +10,7 @@ module.exports = {
           '@components': './src/components',
           '@store': './src/store',
           '@services': './src/services',
-          '@screens': './src/screens',
+          '@pages': './src/pages',
           '@theme': './src/theme',
           '@utils': './src/utils',
           '@hooks': './src/hooks',

@@ -1,111 +1,220 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Ping Parent Frontend
 
-## 📚 Documentation
+A modern React Native mobile application built with TypeScript, following Atomic Design principles and industry best practices.
 
-For comprehensive architecture documentation, conventions, and best practices, see:
+## 🚀 Quick Start
 
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Complete project structure, design system, and development guidelines
+### Prerequisites
 
-## Quick Reference
+- Node.js 18+
+- React Native development environment set up ([Guide](https://reactnative.dev/docs/set-up-your-environment))
+- Android Studio (for Android) or Xcode (for iOS)
+- JDK 17+ (for Android)
 
-- **Tech Stack**: React Native 0.83.0 + TypeScript + Redux Toolkit
-- **Design System**: Token-based theming with atomic design components
-- **Path Aliases**: Use `@components`, `@store`, `@theme`, etc. instead of relative imports
-- **Storybook**: Toggle in `App.tsx` for component development
-- **Styling**: Colocated `styles.ts` files for screens, theme tokens for components
+### Installation
 
-# Getting Started
+```bash
+# Install dependencies
+npm install
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
-
-## Step 1: Start Metro
-
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
-
-To start the Metro dev server, run the following command from the root of your React Native project:
-
-```sh
-# Using npm
+# Start Metro bundler
 npm start
 
-# OR using Yarn
-yarn start
+# Run on Android
+npm run android
+
+# Run on iOS
+npm run ios
 ```
 
-## Step 2: Build and run your app
+## 📱 Features
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+- 🎨 **Atomic Design** - Scalable component architecture (Atoms → Molecules → Organisms → Templates → Pages)
+- 🎭 **Theme System** - Token-based design system with centralized styling
+- 🔐 **Authentication** - Complete auth flow with AsyncStorage
+- 📦 **State Management** - Redux Toolkit with typed actions and selectors
+- 🌍 **Internationalization** - i18n support with translation keys
+- ✅ **Form Validation** - Formik + Yup for type-safe forms
+- 🔗 **Path Aliases** - Clean imports with `@components`, `@store`, etc.
+- 📚 **Storybook** - Component development and documentation
+- 🔧 **TypeScript** - Full type safety throughout the app
+
+## 🏗️ Tech Stack
+
+| Category       | Technologies                                  |
+| -------------- | --------------------------------------------- |
+| **Core**       | React Native 0.83, TypeScript 5.9, React 19.2 |
+| **State**      | Redux Toolkit 2.11, React Redux 9.2           |
+| **Navigation** | React Navigation 7.x (Native Stack)           |
+| **Forms**      | Formik 2.4, Yup 1.2                           |
+| **Storage**    | AsyncStorage 2.2                              |
+| **API**        | Axios 1.13                                    |
+| **Dev Tools**  | Storybook 10.1, ESLint, Prettier, Jest        |
+
+## 📂 Project Structure
+
+```
+pingParentFrontend/
+├── src/
+│   ├── components/          # Atomic Design components
+│   │   ├── atoms/          # Basic building blocks (Button, Input, Text, etc.)
+│   │   ├── molecules/      # Simple combinations (ErrorToast)
+│   │   ├── organisms/      # Complex components (ErrorBoundary)
+│   │   └── templates/      # Page layouts (AuthFormLayout)
+│   ├── pages/              # Application pages (Login, Home, Splash)
+│   ├── navigation/         # Navigation configuration
+│   ├── store/              # Redux store (auth, user, app)
+│   ├── services/           # API services
+│   ├── theme/              # Design tokens and theming
+│   ├── utils/              # Utilities (storage, alerts)
+│   ├── hooks/              # Custom React hooks
+│   ├── schemas/            # Validation schemas
+│   ├── locales/            # Translations
+│   ├── types/              # TypeScript types
+│   └── stories/            # Storybook stories
+├── docs/                   # Documentation
+└── ...
+```
+
+## 📖 Documentation
+
+Comprehensive documentation is available in the [`docs/`](./docs) folder:
+
+- **[ARCHITECTURE.md](./docs/ARCHITECTURE.md)** - Complete architecture guide, design system, conventions
+- **[ATOMIC_DESIGN.md](./docs/ATOMIC_DESIGN.md)** - Atomic Design methodology explained
+- **[SETUP_ANDROID.md](./docs/SETUP_ANDROID.md)** - Android-specific setup guide
+- **[METRO_BUNDLER_GUIDE.md](./docs/METRO_BUNDLER_GUIDE.md)** - Metro bundler troubleshooting & startup guide
+- **[MANUAL_COMMANDS.md](./docs/MANUAL_COMMANDS.md)** - Quick reference for manual CMD commands
+
+### Quick Scripts
+
+- **[start-metro.bat](./docs/start-metro.bat)** - Double-click to start Metro bundler
+- **[run-android.bat](./docs/run-android.bat)** - Double-click to run Android app
+
+## 🎨 Component Architecture
+
+Following **Atomic Design** principles:
+
+- **Atoms** - Basic UI elements (Button, Text, Input, Logo)
+- **Molecules** - Simple component groups (ErrorToast)
+- **Organisms** - Complex, reusable sections (ErrorBoundary)
+- **Templates** - Page-level layouts (AuthFormLayout)
+- **Pages** - Final pages with real content (Login, Home)
+
+## 🔧 Development
+
+### Path Aliases
+
+Use clean imports instead of relative paths:
+
+```typescript
+// ✅ Good
+import { Button } from '@components';
+import { authStorage } from '@utils';
+import { useTheme } from '@theme/ThemeProvider';
+
+// ❌ Avoid
+import { Button } from '../../components/atoms/Button';
+```
+
+### Available Aliases
+
+`@components`, `@pages`, `@store`, `@services`, `@theme`, `@navigation`, `@utils`, `@hooks`, `@types`, `@config`, `@constants`, `@locales`, `@schemas`
+
+### Storybook
+
+Toggle Storybook mode in `App.tsx`:
+
+```typescript
+const ENABLE_STORYBOOK = true; // Set to true for component development
+```
+
+## 🔐 Environment Variables
+
+Configure API endpoints in `src/config/`:
+
+```typescript
+// src/config/env.dev.ts
+export const API_BASE_URL = Platform.select({
+  android: 'http://10.0.2.2:3000',
+  ios: 'http://localhost:3000',
+});
+```
+
+## 🧪 Testing
+
+```bash
+# Run tests
+npm test
+
+# Run tests with coverage
+npm test -- --coverage
+
+# Lint code
+npm run lint
+```
+
+## 🚢 Building for Production
 
 ### Android
 
-```sh
-# Using npm
-npm run android
+```bash
+# Generate release APK
+cd android
+./gradlew assembleRelease
 
-# OR using Yarn
-yarn android
+# Find APK at: android/app/build/outputs/apk/release/app-release.apk
 ```
 
 ### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```bash
+# Build for release
+npx react-native run-ios --configuration Release
 ```
 
-Then, and every time you update your native dependencies, run:
+## 📱 Troubleshooting
 
-```sh
-bundle exec pod install
+### Metro Bundler Issues
+
+```bash
+# Clear cache and restart
+npm start -- --reset-cache
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+### Port 8081 Already in Use
 
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+```powershell
+# Windows PowerShell
+netstat -ano | findstr :8081
+Stop-Process -Id <PID> -Force
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Android Build Issues
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+Ensure `JAVA_HOME` is set correctly:
 
-## Step 3: Modify your app
+```powershell
+$env:JAVA_HOME = "C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot"
+```
 
-Now that you have successfully run the app, let's make changes!
+## 🤝 Contributing
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+1. Follow the coding conventions in [ARCHITECTURE.md](./docs/ARCHITECTURE.md)
+2. Use TypeScript for all new code
+3. Create Storybook stories for reusable components
+4. Write tests for critical functionality
+5. Update documentation as needed
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## 📄 License
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+Private project - All rights reserved
 
-## Congratulations! :tada:
+## 👥 Team
 
-You've successfully run and modified your React Native App. :partying_face:
+- **Project**: Ping Parent Frontend
+- **Version**: 0.0.1
 
-### Now what?
+---
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+For detailed documentation, see the [`docs/`](./docs) folder.

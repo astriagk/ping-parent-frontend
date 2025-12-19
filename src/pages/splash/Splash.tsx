@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, View, Text, useWindowDimensions } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { authStorage } from '@utils';
 import { APP_NAME, APP_VERSION } from '@config';
 import { Logo, LoadingSpinner, ErrorToast } from '@components';
 import { verifyToken } from '@services/auth';
@@ -28,7 +28,7 @@ export default function Splash() {
     }).start();
     (async () => {
       try {
-        const token = await AsyncStorage.getItem('auth_token');
+        const token = await authStorage.getToken();
         const verifier = verifyToken(token);
         const timeout = new Promise((_, reject) =>
           setTimeout(() => reject(new Error('timeout')), VERIFY_TIMEOUT_MS),

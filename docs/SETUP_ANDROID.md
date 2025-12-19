@@ -38,6 +38,8 @@ Persistent (adds to your user environment using `setx`) — replace the paths be
 setx JAVA_HOME "C:\Program Files\Eclipse Adoptium\jdk-17.0.8.7-hotspot"
 # Append JDK bin and Android SDK tools (replace USERNAME and SDK path accordingly)
 setx PATH "%PATH%;C:\Program Files\Eclipse Adoptium\jdk-17.0.8.7-hotspot\bin;C:\Users\%USERNAME%\AppData\Local\Android\Sdk\platform-tools;C:\Users\%USERNAME%\AppData\Local\Android\Sdk\emulator"
+
+setx PATH "%PATH%;C:\Program Files\Eclipse Adoptium\jdk-17.0.8.7-hotspot\bin;C:\Users\GMKR_NBO.NBONB056\AppData\Local\Android\Sdk\platform-tools;C:\Users\GMKR_NBO.NBONB056\AppData\Local\Android\Sdk\emulator"
 ```
 
 Important: `setx` writes to the registry and the change is only visible to future processes. Restart your terminal and Android Studio after using `setx`. Prefer editing System Properties → Environment Variables when possible to avoid PATH truncation.
