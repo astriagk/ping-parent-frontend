@@ -14,6 +14,13 @@ export const API_ENDPOINTS = {
     FORGOT_PASSWORD: '/api/auth/forgot-password',
     RESET_PASSWORD: '/api/auth/reset-password',
     CHANGE_PASSWORD: '/api/auth/change-password',
+    // Phone-based registration
+    SEND_OTP: '/api/auth/register/send-otp',
+    VERIFY_OTP: '/api/auth/register/verify-otp',
+    COMPLETE_REGISTRATION: '/api/auth/register/complete',
+    // Phone-based login
+    LOGIN_SEND_OTP: '/auth/login/send-otp',
+    LOGIN_VERIFY_OTP: '/auth/login/verify-otp',
   },
 
   // User

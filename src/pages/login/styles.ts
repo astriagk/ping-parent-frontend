@@ -77,6 +77,41 @@ export function makeStyles(theme: any) {
       color: theme.colors.text.error || '#FF3B30',
       marginBottom: theme.spacing.md || 12,
       fontSize: theme.fontSizes.sm || 12,
+      textAlign: 'center',
+    },
+    // OTP specific styles
+    otpDescription: {
+      fontSize: theme.fontSizes.md || 14,
+      color: theme.colors.text.muted || '#666',
+      textAlign: 'center',
+      marginBottom: theme.spacing.lg || 24,
+    },
+    otpActions: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: theme.spacing.md || 16,
+    },
+    devOTPContainer: {
+      backgroundColor: '#fff3cd',
+      padding: theme.spacing.md || 12,
+      borderRadius: theme.radii.md || 8,
+      marginBottom: theme.spacing.md || 16,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 8,
+    },
+    devOTPLabel: {
+      fontSize: theme.fontSizes.sm || 12,
+      color: '#856404',
+      fontWeight: '600',
+    },
+    devOTPText: {
+      fontSize: theme.fontSizes.lg || 16,
+      color: '#856404',
+      fontWeight: 'bold',
+      letterSpacing: 2,
     },
   });
 }

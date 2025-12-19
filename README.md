@@ -82,6 +82,7 @@ Comprehensive documentation is available in the [`docs/`](./docs) folder:
 
 - **[ARCHITECTURE.md](./docs/ARCHITECTURE.md)** - Complete architecture guide, design system, conventions
 - **[ATOMIC_DESIGN.md](./docs/ATOMIC_DESIGN.md)** - Atomic Design methodology explained
+- **[BUILD_AND_INSTALL.md](./docs/BUILD_AND_INSTALL.md)** - Building and installing on Android devices
 - **[SETUP_ANDROID.md](./docs/SETUP_ANDROID.md)** - Android-specific setup guide
 - **[METRO_BUNDLER_GUIDE.md](./docs/METRO_BUNDLER_GUIDE.md)** - Metro bundler troubleshooting & startup guide
 - **[MANUAL_COMMANDS.md](./docs/MANUAL_COMMANDS.md)** - Quick reference for manual CMD commands
@@ -90,6 +91,7 @@ Comprehensive documentation is available in the [`docs/`](./docs) folder:
 
 - **[start-metro.bat](./docs/start-metro.bat)** - Double-click to start Metro bundler
 - **[run-android.bat](./docs/run-android.bat)** - Double-click to run Android app
+- **[fix-phone-connection.bat](./docs/fix-phone-connection.bat)** - Fix phone connection issues
 
 ## 🎨 Component Architecture
 

@@ -1,4 +1,5 @@
 import { Alert, AlertButton, Platform } from 'react-native';
+import { t } from '@locales';
 
 /**
  * Alert utility functions for consistent user notifications
@@ -33,7 +34,7 @@ export function showSuccessAlert(
     message,
     [
       {
-        text: 'OK',
+        text: t('ALERTS.OK'),
         onPress: onOk,
       },
     ],
@@ -54,7 +55,7 @@ export function showErrorAlert(
     message,
     [
       {
-        text: 'OK',
+        text: t('ALERTS.OK'),
         onPress: onOk,
         style: 'cancel',
       },
@@ -71,8 +72,8 @@ export function showConfirmAlert(
   message?: string,
   onConfirm?: () => void,
   onCancel?: () => void,
-  confirmText: string = 'Yes',
-  cancelText: string = 'No',
+  confirmText: string = t('ALERTS.YES'),
+  cancelText: string = t('ALERTS.NO'),
 ): void {
   Alert.alert(
     title,
@@ -105,7 +106,7 @@ export function showWarningAlert(
     message,
     [
       {
-        text: 'OK',
+        text: t('ALERTS.OK'),
         onPress: onOk,
       },
     ],
@@ -121,8 +122,8 @@ export function showDestructiveAlert(
   message?: string,
   onConfirm?: () => void,
   onCancel?: () => void,
-  confirmText: string = 'Delete',
-  cancelText: string = 'Cancel',
+  confirmText: string = t('ALERTS.DELETE'),
+  cancelText: string = t('ALERTS.CANCEL'),
 ): void {
   Alert.alert(
     title,
@@ -149,7 +150,7 @@ export function showDestructiveAlert(
 export function showInfoAlert(
   title: string,
   message?: string,
-  buttonText: string = 'OK',
+  buttonText: string = t('ALERTS.OK'),
   onPress?: () => void,
 ): void {
   Alert.alert(
@@ -189,7 +190,7 @@ export const platformAlert = {
       showAlert({
         title,
         message,
-        buttons: [{ text: 'OK', onPress: onOk }],
+        buttons: [{ text: t('ALERTS.OK'), onPress: onOk }],
       });
     }
   },
@@ -202,7 +203,7 @@ export const platformAlert = {
       showAlert({
         title,
         message,
-        buttons: [{ text: 'OK', onPress: onOk }],
+        buttons: [{ text: t('ALERTS.OK'), onPress: onOk }],
       });
     }
   },
@@ -217,8 +218,8 @@ export const commonAlerts = {
    */
   networkError(onRetry?: () => void): void {
     showErrorAlert(
-      'Connection Error',
-      'Unable to connect to the server. Please check your internet connection.',
+      t('ALERTS.CONNECTION_ERROR.TITLE'),
+      t('ALERTS.CONNECTION_ERROR.MESSAGE'),
       onRetry,
     );
   },
@@ -228,11 +229,11 @@ export const commonAlerts = {
    */
   sessionExpired(onLogin?: () => void): void {
     showAlert({
-      title: 'Session Expired',
-      message: 'Your session has expired. Please log in again.',
+      title: t('ALERTS.SESSION_EXPIRED.TITLE'),
+      message: t('ALERTS.SESSION_EXPIRED.MESSAGE'),
       buttons: [
         {
-          text: 'Log In',
+          text: t('ALERTS.LOG_IN'),
           onPress: onLogin,
         },
       ],
@@ -245,12 +246,12 @@ export const commonAlerts = {
    */
   logoutConfirm(onConfirm?: () => void, onCancel?: () => void): void {
     showConfirmAlert(
-      'Logout',
-      'Are you sure you want to log out?',
+      t('ALERTS.LOGOUT_CONFIRM.TITLE'),
+      t('ALERTS.LOGOUT_CONFIRM.MESSAGE'),
       onConfirm,
       onCancel,
-      'Logout',
-      'Cancel',
+      t('ALERTS.LOGOUT'),
+      t('ALERTS.CANCEL'),
     );
   },
 
@@ -263,12 +264,12 @@ export const commonAlerts = {
     onCancel?: () => void,
   ): void {
     showDestructiveAlert(
-      'Delete',
-      `Are you sure you want to delete ${itemName}?`,
+      t('ALERTS.DELETE_CONFIRM.TITLE'),
+      `${t('ALERTS.DELETE_CONFIRM.MESSAGE')} ${itemName}?`,
       onConfirm,
       onCancel,
-      'Delete',
-      'Cancel',
+      t('ALERTS.DELETE'),
+      t('ALERTS.CANCEL'),
     );
   },
 
@@ -276,7 +277,10 @@ export const commonAlerts = {
    * Coming soon alert
    */
   comingSoon(): void {
-    showInfoAlert('Coming Soon', 'This feature is coming soon!');
+    showInfoAlert(
+      t('ALERTS.COMING_SOON.TITLE'),
+      t('ALERTS.COMING_SOON.MESSAGE'),
+    );
   },
 
   /**
@@ -284,12 +288,12 @@ export const commonAlerts = {
    */
   unsavedChanges(onDiscard?: () => void, onCancel?: () => void): void {
     showDestructiveAlert(
-      'Unsaved Changes',
-      'You have unsaved changes. Are you sure you want to leave?',
+      t('ALERTS.UNSAVED_CHANGES.TITLE'),
+      t('ALERTS.UNSAVED_CHANGES.MESSAGE'),
       onDiscard,
       onCancel,
-      'Discard',
-      'Cancel',
+      t('ALERTS.DISCARD'),
+      t('ALERTS.CANCEL'),
     );
   },
 };

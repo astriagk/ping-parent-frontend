@@ -22,11 +22,167 @@
       "PASSWORD_MIN_LENGTH": "Password must be at least 6 characters"
     }
   },
+  "REGISTER": {
+    "TITLE": "Create Account",
+    "SUBTITLE": "Sign up to get started",
+    "FIRST_NAME_PLACEHOLDER": "First Name",
+    "LAST_NAME_PLACEHOLDER": "Last Name",
+    "EMAIL_PLACEHOLDER": "Email Address",
+    "PHONE_PLACEHOLDER": "Phone Number",
+    "PASSWORD_PLACEHOLDER": "Create Password",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Confirm Password",
+    "PASSWORDS_MATCH": "✓ Passwords match",
+    "TERMS_AGREE": "I agree to the ",
+    "TERMS_LINK": "Terms & Conditions",
+    "SUBMIT_BUTTON": "Create Account",
+    "SUBMIT_BUTTON_LOADING": "Creating Account...",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account? ",
+    "LOGIN_LINK": "Login",
+    "SUCCESS_TITLE": "Registration Successful",
+    "SUCCESS_MESSAGE": "Your account has been created successfully!",
+    "ERROR_REGISTRATION_FAILED": "Registration failed. Please try again.",
+    "ERROR_NETWORK": "Network error. Please check your connection."
+  },
+  "REGISTER_OTP": {
+    "STEP_1_TITLE": "Enter Phone Number",
+    "STEP_1_SUBTITLE": "We'll send you a verification code",
+    "STEP_2_TITLE": "Verify Code",
+    "STEP_2_SUBTITLE": "Enter the 6-digit code sent to",
+    "STEP_3_TITLE": "Complete Profile",
+    "STEP_3_SUBTITLE": "Tell us more about yourself",
+    "PHONE_PLACEHOLDER": "Phone Number",
+    "OTP_PLACEHOLDER": "Enter 6-digit code",
+    "FIRST_NAME_PLACEHOLDER": "First Name",
+    "LAST_NAME_PLACEHOLDER": "Last Name",
+    "EMAIL_PLACEHOLDER": "Email Address",
+    "ADDRESS_PLACEHOLDER": "Address (Optional)",
+    "SEND_CODE_BUTTON": "Send Code",
+    "SENDING_CODE_BUTTON": "Sending...",
+    "VERIFY_BUTTON": "Verify",
+    "VERIFYING_BUTTON": "Verifying...",
+    "COMPLETE_BUTTON": "Complete Registration",
+    "COMPLETING_BUTTON": "Completing...",
+    "SKIP_BUTTON": "Skip for Now",
+    "RESEND_CODE": "Resend Code",
+    "RESEND_CODE_IN": "Resend code in",
+    "SECONDS": "seconds",
+    "CODE_SENT": "Code sent successfully!",
+    "CODE_VERIFIED": "Phone verified successfully!",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account? ",
+    "LOGIN_LINK": "Login",
+    "DEV_OTP_SHOWN": "Development Mode: Your OTP is",
+    "VALIDATIONS": {
+      "PHONE_REQUIRED": "Phone number is required",
+      "PHONE_INVALID": "Please enter a valid phone number",
+      "OTP_REQUIRED": "Verification code is required",
+      "OTP_INVALID": "Please enter a valid 6-digit code",
+      "FIRST_NAME_REQUIRED": "First name is required",
+      "FIRST_NAME_MIN": "First name must be at least 2 characters",
+      "FIRST_NAME_MAX": "First name must be less than 50 characters",
+      "LAST_NAME_REQUIRED": "Last name is required",
+      "LAST_NAME_MIN": "Last name must be at least 2 characters",
+      "LAST_NAME_MAX": "Last name must be less than 50 characters",
+      "EMAIL_REQUIRED": "Email address is required",
+      "EMAIL_INVALID": "Please enter a valid email address"
+    },
+    "ERRORS": {
+      "PHONE_EXISTS": "This phone number is already registered",
+      "INVALID_PHONE": "Invalid phone number format",
+      "INVALID_OTP": "Invalid or expired code",
+      "OTP_EXPIRED": "Code has expired. Please request a new one",
+      "PHONE_NOT_VERIFIED": "Please verify your phone number first",
+      "NETWORK_ERROR": "Network error. Please try again"
+    }
+  },
+  "TERMS": {
+    "TITLE": "Terms & Conditions",
+    "ACCEPT_BUTTON": "I Understand",
+    "LAST_UPDATED": "Last Updated: December 19, 2025",
+    "SECTIONS": {
+      "ACCEPTANCE": "1. Acceptance of Terms",
+      "ACCEPTANCE_TEXT": "By accessing and using this application, you accept and agree to be bound by the terms and provision of this agreement.",
+      "LICENSE": "2. Use License",
+      "LICENSE_TEXT": "Permission is granted to temporarily use this application for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title.",
+      "ACCOUNT": "3. User Account",
+      "ACCOUNT_TEXT": "You are responsible for maintaining the confidentiality of your account and password. You agree to accept responsibility for all activities that occur under your account.",
+      "PRIVACY": "4. Privacy Policy",
+      "PRIVACY_TEXT": "Your privacy is important to us. We collect and use your personal information in accordance with our Privacy Policy. By using this application, you consent to the collection and use of your information as outlined.",
+      "CONTENT": "5. User Content",
+      "CONTENT_TEXT": "You retain all rights to any content you submit, post or display on or through the application. By submitting content, you grant us a worldwide, non-exclusive license to use, modify, and display such content.",
+      "PROHIBITED": "6. Prohibited Uses",
+      "PROHIBITED_TEXT": "You may not use the application for any illegal or unauthorized purpose. You must not transmit any worms or viruses or any code of a destructive nature.",
+      "LIABILITY": "7. Limitation of Liability",
+      "LIABILITY_TEXT": "In no event shall the application or its suppliers be liable for any damages arising out of the use or inability to use the materials on the application.",
+      "MODIFICATIONS": "8. Modifications",
+      "MODIFICATIONS_TEXT": "We may revise these terms of service at any time without notice. By using this application you are agreeing to be bound by the then current version of these terms of service.",
+      "GOVERNING_LAW": "9. Governing Law",
+      "GOVERNING_LAW_TEXT": "These terms and conditions are governed by and construed in accordance with the laws and you irrevocably submit to the exclusive jurisdiction of the courts in that location.",
+      "CONTACT": "10. Contact Information",
+      "CONTACT_TEXT": "If you have any questions about these Terms & Conditions, please contact us at support@example.com."
+    }
+  },
+  "PASSWORD": {
+    "STRENGTH": {
+      "WEAK": "Weak",
+      "MEDIUM": "Medium",
+      "STRONG": "Strong"
+    },
+    "REQUIREMENTS": {
+      "MIN_LENGTH": "At least 8 characters",
+      "UPPERCASE": "One uppercase letter",
+      "LOWERCASE": "One lowercase letter",
+      "NUMBER": "One number"
+    }
+  },
+  "PHONE_INPUT": {
+    "PLACEHOLDER": "Phone Number",
+    "SELECT_COUNTRY": "Select Country"
+  },
+  "ALERTS": {
+    "OK": "OK",
+    "YES": "Yes",
+    "NO": "No",
+    "CANCEL": "Cancel",
+    "DELETE": "Delete",
+    "DISCARD": "Discard",
+    "LOG_IN": "Log In",
+    "LOGOUT": "Logout",
+    "CONNECTION_ERROR": {
+      "TITLE": "Connection Error",
+      "MESSAGE": "Unable to connect to the server. Please check your internet connection."
+    },
+    "SESSION_EXPIRED": {
+      "TITLE": "Session Expired",
+      "MESSAGE": "Your session has expired. Please log in again."
+    },
+    "LOGOUT_CONFIRM": {
+      "TITLE": "Logout",
+      "MESSAGE": "Are you sure you want to log out?"
+    },
+    "DELETE_CONFIRM": {
+      "TITLE": "Delete",
+      "MESSAGE": "Are you sure you want to delete"
+    },
+    "COMING_SOON": {
+      "TITLE": "Coming Soon",
+      "MESSAGE": "This feature is coming soon!"
+    },
+    "UNSAVED_CHANGES": {
+      "TITLE": "Unsaved Changes",
+      "MESSAGE": "You have unsaved changes. Are you sure you want to leave?"
+    }
+  },
   "COMMON": {
     "LOADING": "Loading...",
     "ERROR": "Error",
     "SUCCESS": "Success",
     "CANCEL": "Cancel",
     "OK": "OK"
+  },
+  "HOME": {
+    "TITLE": "Home"
+  },
+  "ERROR_BOUNDARY": {
+    "MESSAGE": "Something went wrong."
   }
 }

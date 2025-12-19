@@ -3,7 +3,7 @@ import { Animated, View, Text, useWindowDimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { authStorage } from '@utils';
 import { APP_NAME, APP_VERSION } from '@config';
-import { Logo, LoadingSpinner, ErrorToast } from '@components';
+import { Logo, LoadingSpinner } from '@components';
 import { verifyToken } from '@services/auth';
 import { useTheme } from '@theme/ThemeProvider';
 import makeStyles from './styles';
@@ -16,7 +16,6 @@ export default function Splash() {
   const navigation: any = useNavigation();
   const fade = useRef(new Animated.Value(0)).current;
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { width, height } = useWindowDimensions();
   const styles = makeStyles(theme);
 
@@ -53,8 +52,14 @@ export default function Splash() {
           });
         }
       } catch (err: any) {
-        setError(err.message || 'Verification failed');
-        setLoading(false);
+        // Token verification failed - silently navigate to login
+        Animated.timing(fade, {
+          toValue: 0,
+          duration: FADE_IN_MS,
+          useNativeDriver: true,
+        }).start(() => {
+          navigation.reset({ index: 0, routes: [{ name: 'Login' }] });
+        });
       }
     })();
   }, [fade, navigation]);
@@ -74,10 +79,6 @@ export default function Splash() {
       </Animated.View>
 
       <Text style={styles.version}>v{APP_VERSION}</Text>
-
-      {error ? (
-        <ErrorToast message={error} onClose={() => setError(null)} />
-      ) : null}
     </View>
   );
 }

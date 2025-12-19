@@ -246,41 +246,146 @@ function MyComponent() {
 - Examples: `ErrorBoundary`, form sections
 - **When to use**: Distinct sections of UI with multiple responsibilities
 
+### Component File Organization
+
+**Standard Structure:**
+
+Each component follows a consistent file structure:
+
+```
+ComponentName/
+├── ComponentName.tsx    # Main component logic
+├── types.ts             # TypeScript interfaces/types
+├── styles.ts            # StyleSheet with makeStyles factory
+├── utils.ts             # Helper functions (optional)
+├── countries.ts         # Data/constants (optional)
+└── index.ts             # Barrel export
+```
+
+**Benefits:**
+
+- **Separation of Concerns**: Logic, types, and styles are separated
+- **Maintainability**: Easy to find and update specific aspects
+- **Reusability**: Types and utilities can be shared
+- **Consistency**: Same structure across all components
+- **Scalability**: Easy to add new files (utils, hooks, etc.)
+
 ### Component Template
+
+**ComponentName.tsx:**
 
 ```typescript
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { useTheme } from '@theme/ThemeProvider';
-import { COMPONENT_SIZES } from '@constants';
-
-type Props = {
-  variant?: 'primary' | 'secondary';
-  size?: number;
-  disabled?: boolean;
-};
+import type { MyComponentProps } from './types';
+import { makeStyles } from './styles';
 
 export default function MyComponent({
   variant = 'primary',
-  size = COMPONENT_SIZES.medium,
+  size = 'medium',
   disabled = false,
-}: Props) {
+}: MyComponentProps) {
   const theme = useTheme();
+  const styles = makeStyles(theme);
 
   return (
-    <View
-      style={[styles.container, { backgroundColor: theme.colors[variant] }]}
-    >
-      <Text style={{ fontSize: size }}>Content</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>Content</Text>
     </View>
   );
 }
+```
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-});
+**types.ts:**
+
+```typescript
+import { ViewStyle } from 'react-native';
+
+export interface MyComponentProps {
+  variant?: 'primary' | 'secondary';
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
+  containerStyle?: ViewStyle;
+}
+```
+
+**styles.ts:**
+
+```typescript
+import { StyleSheet } from 'react-native';
+import type { Tokens } from '@theme/tokens';
+
+export const makeStyles = (theme: Tokens) =>
+  StyleSheet.create({
+    container: {
+      padding: theme.spacing.md,
+      borderRadius: theme.radii.md,
+    },
+    text: {
+      fontSize: theme.fontSizes.md,
+      color: theme.colors.text.primary,
+    },
+  });
+```
+
+**index.ts:**
+
+```typescript
+export { default as MyComponent } from './MyComponent';
+export type { MyComponentProps } from './types';
+// Export utilities if any
+```
+
+### Type Organization Best Practices
+
+**✅ DO:**
+
+- **Move interfaces to `types.ts`** - Keep component file focused on logic
+- **Export types** from index.ts for external use
+- **Use descriptive names** - ComponentNameProps, not just Props
+- **Define all prop types** - Avoid `any` or implicit types
+- **Use ViewStyle/TextStyle** for style props
+
+```typescript
+// ✅ Good - types.ts
+export interface ButtonProps {
+  title: string;
+  onPress: () => void;
+  variant?: 'primary' | 'secondary';
+  disabled?: boolean;
+  containerStyle?: ViewStyle;
+  testID?: string;
+}
+
+// ✅ Good - Component.tsx
+import type { ButtonProps } from './types';
+
+export default function Button(props: ButtonProps) {
+  // ...
+}
+```
+
+**❌ DON'T:**
+
+```typescript
+// ❌ Bad - Inline types in component
+export default function Button({
+  title,
+  onPress,
+  variant,
+}: {
+  title: string;
+  onPress: () => void;
+  variant?: 'primary' | 'secondary';
+}) {
+  // ...
+}
+
+// ❌ Bad - Using 'any'
+export default function Button(props: any) {
+  // ...
+}
 ```
 
 ### Form Components
@@ -546,6 +651,75 @@ function MyComponent() {
   );
 }
 ```
+
+### String Management Best Practices
+
+**✅ DO - Move all user-facing strings to locales:**
+
+```typescript
+// ✅ Good - en.json
+{
+  "REGISTER": {
+    "TITLE": "Create Account",
+    "SUBTITLE": "Sign up to get started",
+    "FIRST_NAME_PLACEHOLDER": "First Name",
+    "LAST_NAME_PLACEHOLDER": "Last Name",
+    "SUCCESS_TITLE": "Registration Successful",
+    "SUCCESS_MESSAGE": "Your account has been created successfully!",
+    "VALIDATIONS": {
+      "FIRST_NAME_REQUIRED": "First name is required",
+      "EMAIL_INVALID": "Please enter a valid email address"
+    }
+  }
+}
+
+// ✅ Good - Component using translations
+import { t } from '@locales';
+
+function Register() {
+  return (
+    <>
+      <Text>{t('REGISTER.TITLE')}</Text>
+      <Input placeholder={t('REGISTER.FIRST_NAME_PLACEHOLDER')} />
+    </>
+  );
+}
+```
+
+**❌ DON'T - Hardcode strings in components:**
+
+```typescript
+// ❌ Bad - Hardcoded strings
+function Register() {
+  return (
+    <>
+      <Text>Create Account</Text>
+      <Input placeholder="First Name" />
+      <Text>Your account has been created successfully!</Text>
+    </>
+  );
+}
+```
+
+**Benefits:**
+
+- **Easier to translate** - All strings in one place
+- **Consistency** - Same terminology across app
+- **Maintainability** - Update strings without touching components
+- **Future-proof** - Ready for multi-language support
+
+**When to use translations:**
+
+- ✅ Button labels
+- ✅ Page titles and subtitles
+- ✅ Input placeholders
+- ✅ Error messages
+- ✅ Success/info messages
+- ✅ Validation messages
+- ✅ Navigation labels
+- ❌ Developer console logs
+- ❌ TestIDs or keys
+- ❌ API endpoints
 
 ### Type-Safe Translation Helper
 
@@ -945,27 +1119,34 @@ async function handleLogin(token: string, rememberMe: boolean) {
 
 ### ✅ DO
 
-- **Use path aliases** for all cross-directory imports
-- **Extract constants** for magic numbers (sizes, durations)
-- **Colocate screen styles** in separate `styles.ts` files
+- **Use path aliases** for all cross-directory imports (`@components`, `@utils`)
+- **Move interfaces to `types.ts`** - Keep component files focused on logic
+- **Move all user-facing strings to `locales/en.json`** - Never hardcode text
+- **Use `t()` function** for all displayed text (labels, placeholders, messages)
+- **Extract constants** for magic numbers (sizes, durations) to `@constants`
+- **Colocate screen styles** in separate `styles.ts` files with makeStyles
 - **Use theme tokens** instead of hardcoded colors/spacing
 - **Create stories** for all reusable components
 - **Follow atomic design** hierarchy when creating components
-- **Type all props** with TypeScript interfaces/types
+- **Type all props** with TypeScript interfaces/types (avoid `any`)
 - **Use barrel exports** (`index.ts`) for clean imports
 - **Add accessibility labels** to interactive elements
 - **Test on both platforms** (iOS + Android)
+- **Export types** from component index.ts for external use
 
 ### ❌ DON'T
 
 - **Don't use relative imports** like `../../components` (use `@components`)
-- **Don't hardcode colors/spacing** (use tokens)
-- **Don't create inline styles** for complex screens
+- **Don't define types inline** in component files (use `types.ts`)
+- **Don't hardcode strings** in components (use `t('KEY')` from locales)
+- **Don't hardcode colors/spacing** (use tokens from theme)
+- **Don't create inline styles** for complex screens (use `styles.ts`)
 - **Don't skip TypeScript types** (`any` should be minimal)
 - **Don't nest components** more than necessary
 - **Don't forget to update stories** when changing components
 - **Don't use `localhost`** for Android emulator (use `10.0.2.2`)
 - **Don't commit** sensitive data in config files
+- **Don't mix logic and types** in the same file
 
 ### Naming Conventions
 
@@ -1036,20 +1217,71 @@ function MyComponent() {
 
 ### New Component Checklist
 
-1. **Determine atomic level** (primitive/atom/molecule/organism)
-2. **Create component folder** with structure:
-   - `ComponentName.tsx` - Main component
-   - `types.ts` - TypeScript prop types
-   - `styles.ts` - makeStyles factory
-   - `index.ts` - Barrel export
-3. **Define TypeScript types** for props
-4. **Use theme tokens** for styling
-5. **Extract constants** if needed (add to `@constants`)
-6. **Add to barrel export** (`components/index.ts`)
-7. **Create story file** in matching `stories/` folder (`ComponentName.stories.tsx`)
-8. **Update story loader** (`storybook/storybook.requires.ts`)
-9. **Test in Storybook** (set `SHOW_STORYBOOK = true` in App.tsx)
-10. **Test in actual app** with real data
+1. **Determine atomic level** (atom/molecule/organism/template)
+2. **Create component folder** with standardized structure:
+   ```
+   ComponentName/
+   ├── ComponentName.tsx    # Main component
+   ├── types.ts             # TypeScript interfaces
+   ├── styles.ts            # makeStyles factory
+   ├── utils.ts             # Helper functions (optional)
+   └── index.ts             # Barrel exports
+   ```
+3. **Move all interfaces to `types.ts`** - Keep component file clean
+4. **Define TypeScript types** for all props (no `any`)
+5. **Add user-facing strings to `locales/en.json`** - Don't hardcode text
+6. **Use theme tokens** for all styling
+7. **Export from `index.ts`** - Component and types
+8. **Add to parent barrel export** (`components/index.ts`)
+9. **Create story file** in matching `stories/` folder
+10. **Update story loader** (`storybook/storybook.requires.ts`)
+11. **Test in Storybook** (set `SHOW_STORYBOOK = true`)
+12. **Test in actual app** with real data
+
+**Example Workflow:**
+
+```typescript
+// 1. Create types.ts
+export interface CheckboxProps {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  label?: string;
+  error?: boolean;
+}
+
+// 2. Create styles.ts
+export const makeStyles = (theme: Tokens) => StyleSheet.create({
+  container: { flexDirection: 'row' },
+  // ...
+});
+
+// 3. Add strings to en.json
+{
+  "CHECKBOX": {
+    "ARIA_LABEL": "Checkbox",
+    "CHECKED": "Checked",
+    "UNCHECKED": "Unchecked"
+  }
+}
+
+// 4. Create Checkbox.tsx
+import type { CheckboxProps } from './types';
+import { makeStyles } from './styles';
+import { t } from '@locales';
+
+export default function Checkbox(props: CheckboxProps) {
+  const theme = useTheme();
+  const styles = makeStyles(theme);
+  // ...
+}
+
+// 5. Export from index.ts
+export { default as Checkbox } from './Checkbox';
+export type { CheckboxProps } from './types';
+
+// 6. Add to components/index.ts
+export * from './atoms/Checkbox';
+```
 
 ### New Page Checklist
 

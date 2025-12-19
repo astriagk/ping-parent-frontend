@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { t } from '@locales';
 
 type State = { hasError: boolean };
 
@@ -22,7 +23,7 @@ export default class ErrorBoundary extends React.Component<any, State> {
     if (this.state.hasError) {
       return (
         <View style={styles.center}>
-          <Text style={styles.text}>Something went wrong.</Text>
+          <Text style={styles.text}>{t('ERROR_BOUNDARY.MESSAGE')}</Text>
         </View>
       );
     }
