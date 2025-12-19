@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ViewProps, StyleProp, ViewStyle } from 'react-native';
-import { useTheme } from '../../theme/ThemeProvider';
+import { useTheme } from '@theme/ThemeProvider';
 
 type Props = ViewProps & { style?: StyleProp<ViewStyle> };
 

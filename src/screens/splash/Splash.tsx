@@ -2,12 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Animated, View, Text, useWindowDimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { APP_NAME, APP_VERSION } from '../../config';
-import Logo from '../../components/Logo';
-import LoadingSpinner from '../../components/LoadingSpinner';
-import ErrorToast from '../../components/ErrorToast';
-import { verifyToken } from '../../services/auth';
-import { useTheme } from '../../theme/ThemeProvider';
+import { APP_NAME, APP_VERSION } from '@config';
+import { Logo, LoadingSpinner, ErrorToast } from '@components';
+import { verifyToken } from '@services/auth';
+import { useTheme } from '@theme/ThemeProvider';
 import makeStyles from './styles';
 
 const FADE_IN_MS = 300;

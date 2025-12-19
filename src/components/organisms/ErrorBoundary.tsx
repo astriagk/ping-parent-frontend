@@ -14,7 +14,7 @@ export default class ErrorBoundary extends React.Component<any, State> {
   }
 
   componentDidCatch(error: any, info: any) {
-    // log error to service
+    // Log error to service (e.g., Sentry)
     console.warn('Caught by ErrorBoundary', error, info);
   }
 
@@ -22,7 +22,7 @@ export default class ErrorBoundary extends React.Component<any, State> {
     if (this.state.hasError) {
       return (
         <View style={styles.center}>
-          <Text>Something went wrong.</Text>
+          <Text style={styles.text}>Something went wrong.</Text>
         </View>
       );
     }
@@ -32,4 +32,5 @@ export default class ErrorBoundary extends React.Component<any, State> {
 
 const styles = StyleSheet.create({
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  text: { fontSize: 16, color: '#333' },
 });

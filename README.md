@@ -1,5 +1,19 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+## 📚 Documentation
+
+For comprehensive architecture documentation, conventions, and best practices, see:
+
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Complete project structure, design system, and development guidelines
+
+## Quick Reference
+
+- **Tech Stack**: React Native 0.83.0 + TypeScript + Redux Toolkit
+- **Design System**: Token-based theming with atomic design components
+- **Path Aliases**: Use `@components`, `@store`, `@theme`, etc. instead of relative imports
+- **Storybook**: Toggle in `App.tsx` for component development
+- **Styling**: Colocated `styles.ts` files for screens, theme tokens for components
+
 # Getting Started
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.

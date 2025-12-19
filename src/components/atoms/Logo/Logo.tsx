@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, View, StyleSheet } from 'react-native';
+import { Image, View } from 'react-native';
+import type { LogoProps } from './types';
+import { styles } from './styles';
 
-export default function Logo({ size = 80 }: { size?: number }) {
-  // Placeholder image. Replace with real asset/svg later.
+export default function Logo({ size = 80 }: LogoProps) {
   return (
     <View style={[styles.container, { width: size, height: size }]}>
       <Image
@@ -15,7 +16,3 @@ export default function Logo({ size = 80 }: { size?: number }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { alignItems: 'center', justifyContent: 'center' },
-});

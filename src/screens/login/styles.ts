@@ -14,26 +14,6 @@ export function makeStyles(theme: any) {
       fontSize: theme.fontSizes.xl || 24,
       marginBottom: theme.spacing.lg || 24,
     },
-    input: {
-      borderWidth: 1,
-      borderColor: theme.colors.border || '#ddd',
-      padding: theme.spacing.md || 12,
-      borderRadius: theme.radii.md || 8,
-      marginBottom: theme.spacing.sm || 8,
-      backgroundColor: theme.colors.surface || '#fff',
-    },
-    inputFlex: {
-      borderWidth: 1,
-      borderColor: theme.colors.border || '#ddd',
-      padding: theme.spacing.md || 12,
-      borderRadius: theme.radii.md || 8,
-      marginBottom: theme.spacing.sm || 8,
-      backgroundColor: theme.colors.surface || '#fff',
-      flex: 1,
-    },
-    passwordRow: { flexDirection: 'row', alignItems: 'center' },
-    eye: { padding: theme.spacing.sm || 8, marginLeft: theme.spacing.sm || 8 },
-    eyeText: { color: theme.colors.primary },
     rowBetween: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -93,7 +73,8 @@ export function makeStyles(theme: any) {
     fullWidth: { width: '100%' },
     error: {
       color: theme.colors.text.error || '#FF3B30',
-      marginBottom: theme.spacing.sm || 8,
+      marginBottom: theme.spacing.md || 12,
+      fontSize: theme.fontSizes.sm || 12,
     },
   });
 }

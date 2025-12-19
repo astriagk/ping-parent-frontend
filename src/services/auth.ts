@@ -1,4 +1,5 @@
 import api from './api';
+import { API_ENDPOINTS } from './endpoints';
 
 type VerifyResponse = {
   success: boolean;
@@ -19,7 +20,7 @@ export async function verifyToken(
     if (refreshToken) headers['X-Refresh-Token'] = refreshToken;
 
     // Call the backend endpoint expected by the project
-    const res = await api.get<VerifyResponse>('/api/auth/verify-token', {
+    const res = await api.get<VerifyResponse>(API_ENDPOINTS.AUTH.VERIFY_TOKEN, {
       headers,
     });
 
@@ -40,7 +41,7 @@ export async function verifyToken(
 
 export async function login(emailOrPhone: string, password: string) {
   try {
-    const res = await api.post('/api/auth/login', {
+    const res = await api.post(API_ENDPOINTS.AUTH.LOGIN, {
       email: emailOrPhone,
       password,
     });

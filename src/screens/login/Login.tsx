@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   Platform,
   KeyboardAvoidingView,
@@ -11,38 +10,20 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { login as loginService } from '../../services/auth';
-import LoadingSpinner from '../../components/LoadingSpinner';
+import { login as loginService } from '@services/auth';
+import { LoadingSpinner, Input, PasswordInput } from '@components';
 import { useDispatch } from 'react-redux';
-import { setToken } from '../../store/authSlice';
-import { useTheme } from '../../theme/ThemeProvider';
+import { authActions } from '@store';
+import { useTheme } from '@theme/ThemeProvider';
 import makeStyles from './styles';
-
-const LoginSchema = Yup.object().shape({
-  emailOrPhone: Yup.string()
-    .required('Email or phone is required')
-    .test(
-      'email-or-phone',
-      'Please enter a valid email address or phone number',
-      (value: string | undefined) => {
-        if (!value) return false;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const phoneRegex = /^[0-9+\-() ]{6,20}$/;
-        return emailRegex.test(value) || phoneRegex.test(value);
-      },
-    ),
-  password: Yup.string()
-    .required('Password is required')
-    .min(6, 'Password must be at least 6 characters'),
-});
+import { LoginSchema } from '@schemas';
+import { t } from '@locales';
 
 export default function Login() {
   const theme = useTheme();
   const navigation: any = useNavigation();
   const dispatch = useDispatch();
-  const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const styles = makeStyles(theme);
 
@@ -57,10 +38,10 @@ export default function Login() {
         const token = res.data.token;
         await AsyncStorage.setItem('auth_token', token);
         if (rememberMe) await AsyncStorage.setItem('remember_me', '1');
-        dispatch(setToken(token));
-        Alert.alert('Success', 'Logged in successfully', [
+        dispatch(authActions.setToken(token));
+        Alert.alert(t('LOGIN.SUCCESS_TITLE'), t('LOGIN.SUCCESS_MESSAGE'), [
           {
-            text: 'Continue',
+            text: t('LOGIN.CONTINUE'),
             onPress: () =>
               navigation.reset({ index: 0, routes: [{ name: 'Home' }] }),
           },
@@ -69,15 +50,13 @@ export default function Login() {
         const err = res.error;
         const msg =
           err?.message ||
-          (typeof err === 'string'
-            ? err
-            : 'Invalid credentials. Please try again.');
+          (typeof err === 'string' ? err : t('LOGIN.INVALID_CREDENTIALS'));
         helpers.setFieldError('general', msg);
       }
     } catch (e: any) {
       helpers.setFieldError(
         'general',
-        e?.message || 'Unable to connect. Please check your internet.',
+        e?.message || t('LOGIN.CONNECTION_ERROR'),
       );
     } finally {
       helpers.setSubmitting(false);
@@ -94,7 +73,7 @@ export default function Login() {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.inner}>
-          <Text style={styles.title}>Welcome Back</Text>
+          <Text style={styles.title}>{t('LOGIN.TITLE')}</Text>
 
           <Formik
             initialValues={{ emailOrPhone: '', password: '' }}
@@ -115,50 +94,29 @@ export default function Login() {
 
               return (
                 <View style={styles.fullWidth}>
-                  <TextInput
-                    placeholder="Email or Phone Number"
-                    placeholderTextColor={theme.colors.text.placeholder}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    style={styles.input}
+                  <Input
+                    value={values.emailOrPhone}
                     onChangeText={handleChange('emailOrPhone')}
                     onBlur={handleBlur('emailOrPhone')}
-                    value={values.emailOrPhone}
+                    placeholder={t('LOGIN.EMAIL_OR_PHONE_PLACEHOLDER')}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
                     editable={!isSubmitting}
+                    error={errors.emailOrPhone}
+                    touched={touched.emailOrPhone}
                     accessibilityLabel="Email or Phone"
                   />
-                  {touched.emailOrPhone && errors.emailOrPhone ? (
-                    <Text style={styles.error}>{errors.emailOrPhone}</Text>
-                  ) : null}
 
-                  <View style={styles.passwordRow}>
-                    <TextInput
-                      placeholder="Password"
-                      placeholderTextColor={theme.colors.text.placeholder}
-                      secureTextEntry={!showPassword}
-                      style={styles.inputFlex}
-                      onChangeText={handleChange('password')}
-                      onBlur={handleBlur('password')}
-                      value={values.password}
-                      editable={!isSubmitting}
-                      accessibilityLabel="Password"
-                    />
-                    <TouchableOpacity
-                      onPress={() => setShowPassword(s => !s)}
-                      style={styles.eye}
-                      accessibilityLabel={
-                        showPassword ? 'Hide password' : 'Show password'
-                      }
-                    >
-                      <Text style={styles.eyeText}>
-                        {showPassword ? '🙈' : '👁️'}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                  {touched.password && errors.password ? (
-                    <Text style={styles.error}>{errors.password}</Text>
-                  ) : null}
-
+                  <PasswordInput
+                    value={values.password}
+                    onChangeText={handleChange('password')}
+                    onBlur={handleBlur('password')}
+                    placeholder={t('LOGIN.PASSWORD_PLACEHOLDER')}
+                    editable={!isSubmitting}
+                    error={errors.password}
+                    touched={touched.password}
+                    accessibilityLabel="Password"
+                  />
                   <View style={styles.rowBetween}>
                     <TouchableOpacity
                       onPress={() => setRememberMe(r => !r)}
@@ -179,14 +137,16 @@ export default function Login() {
                         ) : null}
                       </View>
                       <Text style={styles.rememberText}>
-                        Remember me on this device
+                        {t('LOGIN.REMEMBER_ME')}
                       </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                       onPress={() => navigation.navigate('ForgotPassword')}
                     >
-                      <Text style={styles.link}>Forgot Password?</Text>
+                      <Text style={styles.link}>
+                        {t('LOGIN.FORGOT_PASSWORD')}
+                      </Text>
                     </TouchableOpacity>
                   </View>
 
@@ -209,16 +169,22 @@ export default function Login() {
                     {isSubmitting ? (
                       <LoadingSpinner />
                     ) : (
-                      <Text style={styles.buttonText}>Login</Text>
+                      <Text style={styles.buttonText}>
+                        {t('LOGIN.LOGIN_BUTTON')}
+                      </Text>
                     )}
                   </TouchableOpacity>
 
                   <View style={styles.registerRow}>
-                    <Text style={styles.mutedText}>Don't have an account?</Text>
+                    <Text style={styles.mutedText}>
+                      {t('LOGIN.NO_ACCOUNT')}
+                    </Text>
                     <TouchableOpacity
                       onPress={() => navigation.navigate('Register')}
                     >
-                      <Text style={styles.registerLink}>Register</Text>
+                      <Text style={styles.registerLink}>
+                        {t('LOGIN.REGISTER')}
+                      </Text>
                     </TouchableOpacity>
                   </View>
                 </View>

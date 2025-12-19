@@ -1,0 +1,32 @@
+{
+  "LOGIN": {
+    "TITLE": "Welcome Back",
+    "EMAIL_OR_PHONE_PLACEHOLDER": "Email or Phone Number",
+    "PASSWORD_PLACEHOLDER": "Password",
+    "REMEMBER_ME": "Remember me on this device",
+    "FORGOT_PASSWORD": "Forgot Password?",
+    "LOGIN_BUTTON": "Login",
+    "NO_ACCOUNT": "Don't have an account?",
+    "REGISTER": "Register",
+    "SUCCESS_TITLE": "Success",
+    "SUCCESS_MESSAGE": "Logged in successfully",
+    "CONTINUE": "Continue",
+    "INVALID_CREDENTIALS": "Invalid credentials. Please try again.",
+    "CONNECTION_ERROR": "Unable to connect. Please check your internet.",
+    "SHOW_PASSWORD": "Show password",
+    "HIDE_PASSWORD": "Hide password",
+    "VALIDATIONS": {
+      "EMAIL_OR_PHONE_REQUIRED": "Email or phone is required",
+      "EMAIL_OR_PHONE_INVALID": "Please enter a valid email address or phone number",
+      "PASSWORD_REQUIRED": "Password is required",
+      "PASSWORD_MIN_LENGTH": "Password must be at least 6 characters"
+    }
+  },
+  "COMMON": {
+    "LOADING": "Loading...",
+    "ERROR": "Error",
+    "SUCCESS": "Success",
+    "CANCEL": "Cancel",
+    "OK": "OK"
+  }
+}
