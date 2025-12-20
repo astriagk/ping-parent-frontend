@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
-import { useTheme } from "../../hooks/useTheme";
-import { ThemeSwitcher } from "../../components/common/ThemeSwitcher";
-import { Button } from "../../components/ui/Button";
+import { useTheme } from "@hooks/useTheme";
+import { ThemeSwitcher } from "@components/common/ThemeSwitcher";
+import { Button } from "@components/ui/Button";
 
 export const SettingsScreen = () => {
   const { colors, isDark } = useTheme();

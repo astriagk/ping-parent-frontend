@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { useTheme } from "../../hooks/useTheme";
-import type { ThemeMode } from "../../store/useThemeStore";
+import { useTheme } from "@hooks/useTheme";
+import type { ThemeMode } from "@store/useThemeStore";
 
 export const ThemeSwitcher: React.FC = () => {
   const { theme, setTheme, toggleTheme, isDark } = useTheme();
@@ -33,8 +33,8 @@ export const ThemeSwitcher: React.FC = () => {
                   ? "bg-blue-600"
                   : "bg-blue-500"
                 : isDark
-                ? "bg-gray-700"
-                : "bg-gray-100"
+                  ? "bg-gray-700"
+                  : "bg-gray-100"
             }`}
           >
             <Text
@@ -42,8 +42,8 @@ export const ThemeSwitcher: React.FC = () => {
                 theme === themeOption.value
                   ? "text-white"
                   : isDark
-                  ? "text-gray-300"
-                  : "text-gray-700"
+                    ? "text-gray-300"
+                    : "text-gray-700"
               }`}
             >
               {themeOption.label}

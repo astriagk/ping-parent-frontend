@@ -65,8 +65,48 @@ EXPO_PUBLIC_ENV=development
 
 ## Development
 
-- `npm run lint` - Run linter
-- `npm run type-check` - Check TypeScript types
+### Code Quality
+
+This project uses ESLint and Prettier to maintain code quality and consistency.
+
+**Available Commands:**
+
+```bash
+# Linting
+npm run lint              # Check for linting errors
+npm run lint:fix          # Fix linting errors automatically
+
+# Formatting
+npm run format            # Format all files with Prettier
+npm run format:check      # Check if files are formatted correctly
+
+# Type Checking
+npm run type-check        # Check TypeScript types
+```
+
+**Code Standards:**
+
+- ✅ **ESLint**: Enforces code quality rules
+- ✅ **Prettier**: Auto-formats code on save
+- ⚠️ **No console statements**: Use proper logging (console warnings enabled)
+- ✅ **TypeScript**: Strict type checking enabled
+
+**VS Code Setup:**
+
+- Install the Prettier extension (`esbenp.prettier-vscode`)
+- Format on save is enabled automatically via `.vscode/settings.json`
+- ESLint auto-fix on save is configured
+
+**Git Hooks (Pre-commit):**
+
+When you commit code, the pre-commit hook will automatically:
+
+1. Run ESLint on staged files and fix issues
+2. Run Prettier to format staged files
+3. Block the commit if there are unfixable linting errors
+4. Show clear error messages indicating what needs to be fixed
+
+This ensures all committed code meets quality standards.
 
 ## License
 

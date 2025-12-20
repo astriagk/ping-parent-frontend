@@ -1,5 +1,5 @@
-import { useThemeStore } from "../store/useThemeStore";
-import { lightTheme, darkTheme } from "../config/gluestack-ui.config";
+import { useThemeStore } from "@store/useThemeStore";
+import { lightTheme, darkTheme } from "@config/gluestack-ui.config";
 
 export const useTheme = () => {
   const { theme, colorScheme, setTheme, toggleTheme } = useThemeStore();

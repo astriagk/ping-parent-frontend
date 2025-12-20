@@ -1,10 +1,14 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
+import { AuthLayout } from "@components/layouts/AuthLayout";
+import { useTranslation } from "@hooks/useTranslation";
 
 export const RegisterScreen = () => {
+  const { t } = useTranslation();
+
   return (
-    <View className="flex-1 justify-center items-center bg-white">
-      <Text className="text-2xl font-bold">Register Screen</Text>
-    </View>
+    <AuthLayout>
+      <Text className="text-2xl font-bold">{t("auth.register.title")}</Text>
+    </AuthLayout>
   );
 };

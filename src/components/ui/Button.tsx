@@ -19,8 +19,8 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <GluestackButton
       onPress={onPress}
-      variant={variant}
       isDisabled={isDisabled || isLoading}
+      style={variant === "outline" ? { borderWidth: 1 } : undefined}
     >
       <ButtonText>{isLoading ? "Loading..." : title}</ButtonText>
     </GluestackButton>

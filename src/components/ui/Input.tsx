@@ -1,5 +1,6 @@
 import React from "react";
 import { Input as GluestackInput, InputField } from "@gluestack-ui/themed";
+import type { KeyboardTypeOptions } from "react-native";
 
 interface InputProps {
   value: string;
@@ -7,6 +8,9 @@ interface InputProps {
   placeholder?: string;
   secureTextEntry?: boolean;
   error?: string;
+  editable?: boolean;
+  keyboardType?: KeyboardTypeOptions;
+  maxLength?: number;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -15,14 +19,20 @@ export const Input: React.FC<InputProps> = ({
   placeholder,
   secureTextEntry = false,
   error,
+  editable = true,
+  keyboardType = "default",
+  maxLength,
 }) => {
   return (
-    <GluestackInput variant={error ? "error" : "outline"}>
+    <GluestackInput isInvalid={!!error}>
       <InputField
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
+        editable={editable}
+        keyboardType={keyboardType}
+        maxLength={maxLength}
       />
     </GluestackInput>
   );

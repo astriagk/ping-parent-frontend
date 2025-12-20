@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import type { MainRouteProp } from "../../navigation/types";
+import type { MainRouteProp } from "@navigation/types";
 
 export const ProfileScreen = () => {
   const route = useRoute<MainRouteProp<"Profile">>();

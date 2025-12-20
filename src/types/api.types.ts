@@ -11,6 +11,30 @@ export interface RegisterRequest {
   password: string;
 }
 
+export interface SendOTPRequest {
+  phone: string;
+}
+
+export interface SendOTPResponse {
+  success: boolean;
+  message: string;
+  otp?: string; // Only in development mode
+}
+
+export interface VerifyOTPRequest {
+  phone: string;
+  otp: string;
+}
+
+export interface VerifyOTPResponse {
+  success: boolean;
+  data: {
+    token: string;
+    user: User;
+  };
+  message: string;
+}
+
 export interface AuthResponse {
   token: string;
   user: User;

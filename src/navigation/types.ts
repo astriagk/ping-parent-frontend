@@ -3,6 +3,7 @@ import type { RouteProp } from "@react-navigation/native";
 
 // Auth Stack
 export type AuthStackParamList = {
+  Splash: undefined;
   Login: undefined;
   Register: undefined;
 };

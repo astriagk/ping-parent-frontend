@@ -3,9 +3,9 @@ import { GluestackUIProvider } from "@gluestack-ui/themed";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useColorScheme } from "react-native";
-import { RootNavigator } from "./navigation/RootNavigator";
-import { config } from "./config/gluestack-ui.config";
-import { useThemeStore } from "./store/useThemeStore";
+import { RootNavigator } from "@navigation/RootNavigator";
+import { config } from "@config/gluestack-ui.config";
+import { useThemeStore } from "@store/useThemeStore";
 import { useEffect } from "react";
 
 const queryClient = new QueryClient({

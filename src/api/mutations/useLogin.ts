@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { apiClient } from "../client";
-import { useAuthStore } from "../../store/useAuthStore";
-import type { LoginRequest, AuthResponse } from "../../types/api.types";
+import { apiClient } from "@api/client";
+import { API_ENDPOINTS } from "@api/endpoints";
+import { useAuthStore } from "@store/useAuthStore";
+import type { LoginRequest, AuthResponse } from "@models/api.types";
 
 export const useLogin = () => {
   const setAuth = useAuthStore((state) => state.setAuth);
@@ -9,7 +10,7 @@ export const useLogin = () => {
   return useMutation({
     mutationFn: async (credentials: LoginRequest) => {
       const { data } = await apiClient.post<AuthResponse>(
-        "/auth/login",
+        API_ENDPOINTS.AUTH.LOGIN,
         credentials
       );
       return data;
