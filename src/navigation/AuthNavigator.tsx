@@ -1,8 +1,8 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SplashScreen } from "@screens/auth/SplashScreen";
-import { LoginScreen } from "@screens/auth/LoginScreen";
-import { RegisterScreen } from "@screens/auth/RegisterScreen";
+import { SplashScreen } from "@app/screens/auth/SplashScreen";
+import { LoginScreen } from "@app/screens/auth/LoginScreen";
+import { RegisterScreen } from "@app/screens/auth/RegisterScreen";
 import { ROUTES } from "./routes";
 import type { AuthStackParamList } from "./types";
 

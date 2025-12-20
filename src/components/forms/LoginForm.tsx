@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import { Input } from "@components/ui/Input";
-import { Button } from "@components/ui/Button";
-import { useSendOTP } from "@api/mutations/useSendOTP";
-import { useVerifyOTP } from "@api/mutations/useVerifyOTP";
-import { useTranslation } from "@hooks/useTranslation";
+import {
+  VStack,
+  Box,
+  Text,
+  Input,
+  InputField,
+  Button,
+  ButtonText,
+} from "@app/components/ui";
+import { useSendOTP } from "@app/api/mutations/useSendOTP";
+import { useVerifyOTP } from "@app/api/mutations/useVerifyOTP";
+import { useTranslation } from "@app/hooks/useTranslation";
 
 interface LoginFormData {
   phone: string;
@@ -54,12 +60,12 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <View className="w-full">
-      <Text className="text-3xl font-bold mb-8 text-center">
+    <VStack space="md" className="w-full">
+      <Text className="text-2xl font-bold mb-8 text-center">
         {t("auth.login.title")}
       </Text>
 
-      <View className="mb-4">
+      <Box className="mb-4">
         <Controller
           control={control}
           name="phone"
@@ -71,40 +77,43 @@ export const LoginForm: React.FC = () => {
             },
           }}
           render={({ field: { onChange, value } }) => (
-            <Input
-              value={value}
-              onChangeText={onChange}
-              placeholder={t("auth.login.phone")}
-              error={errors.phone?.message}
-              editable={!otpSent}
-            />
+            <Input className={errors.phone ? "border-error-500" : ""}>
+              <InputField
+                value={value}
+                onChangeText={onChange}
+                placeholder={t("auth.login.phone")}
+                editable={!otpSent}
+              />
+            </Input>
           )}
         />
         {errors.phone && (
-          <Text className="text-red-500 text-sm mt-1">
+          <Text className="text-error-500 text-sm mt-1">
             {errors.phone.message}
           </Text>
         )}
-      </View>
+      </Box>
 
       {!otpSent ? (
         <Button
           onPress={onSendOTP}
-          title={t("auth.login.sendOTP")}
-          isLoading={sendOTPMutation.isPending}
-          isDisabled={!phone || !!errors.phone}
-        />
+          isDisabled={!phone || !!errors.phone || sendOTPMutation.isPending}
+        >
+          <ButtonText>
+            {sendOTPMutation.isPending ? "Loading..." : t("auth.login.sendOTP")}
+          </ButtonText>
+        </Button>
       ) : (
         <>
           {devOTP && (
-            <View className="mb-4 p-3 bg-yellow-100 rounded">
+            <Box className="mb-4 p-3 bg-yellow-100 rounded-lg">
               <Text className="text-sm text-yellow-800 font-medium">
                 {t("auth.login.devOTP")}: {devOTP}
               </Text>
-            </View>
+            </Box>
           )}
 
-          <View className="mb-6">
+          <Box className="mb-6">
             <Controller
               control={control}
               name="otp"
@@ -116,42 +125,50 @@ export const LoginForm: React.FC = () => {
                 },
               }}
               render={({ field: { onChange, value } }) => (
-                <Input
-                  value={value}
-                  onChangeText={onChange}
-                  placeholder={t("auth.login.otp")}
-                  error={errors.otp?.message}
-                  keyboardType="number-pad"
-                  maxLength={6}
-                />
+                <Input className={errors.otp ? "border-error-500" : ""}>
+                  <InputField
+                    value={value}
+                    onChangeText={onChange}
+                    placeholder={t("auth.login.otp")}
+                    keyboardType="number-pad"
+                    maxLength={6}
+                  />
+                </Input>
               )}
             />
             {errors.otp && (
-              <Text className="text-red-500 text-sm mt-1">
+              <Text className="text-error-500 text-sm mt-1">
                 {errors.otp.message}
               </Text>
             )}
-          </View>
+          </Box>
 
           <Button
             onPress={handleSubmit(onVerifyOTP)}
-            title={t("auth.login.verifyOTP")}
-            isLoading={verifyOTPMutation.isPending}
-          />
+            isDisabled={verifyOTPMutation.isPending}
+          >
+            <ButtonText>
+              {verifyOTPMutation.isPending
+                ? "Loading..."
+                : t("auth.login.verifyOTP")}
+            </ButtonText>
+          </Button>
 
           <Button
             onPress={() => {
               setOtpSent(false);
               setDevOTP("");
             }}
-            title={t("auth.login.resendOTP")}
             variant="outline"
             isDisabled={
               sendOTPMutation.isPending || verifyOTPMutation.isPending
             }
-          />
+            className="border"
+          >
+            <ButtonText>{t("auth.login.resendOTP")}</ButtonText>
+          </Button>
         </>
       )}
-    </View>
+    </VStack>
   );
 };

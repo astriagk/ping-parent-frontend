@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
-import { AuthLayout } from "@components/layouts/AuthLayout";
-import { useTranslation } from "@hooks/useTranslation";
+import { AuthLayout } from "@app/components/layouts/AuthLayout";
+import { useTranslation } from "@app/hooks/useTranslation";
 
 export const RegisterScreen = () => {
   const { t } = useTranslation();

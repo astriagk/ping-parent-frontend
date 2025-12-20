@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
-import { useTheme } from "@hooks/useTheme";
-import { ThemeSwitcher } from "@components/common/ThemeSwitcher";
-import { Button } from "@components/ui/Button";
+import { useTheme } from "@app/hooks/useTheme";
+import { ThemeSwitcher } from "@app/components/common/ThemeSwitcher";
+import { Button, ButtonText } from "@app/components/ui";
 
 export const SettingsScreen = () => {
   const { colors, isDark } = useTheme();
@@ -76,12 +76,12 @@ export const SettingsScreen = () => {
 
         {/* Example Buttons */}
         <View className="space-y-3">
-          <Button title="Primary Button" onPress={() => {}} />
-          <Button
-            title="Secondary Button"
-            onPress={() => {}}
-            variant="outline"
-          />
+          <Button onPress={() => {}}>
+            <ButtonText>Primary Button</ButtonText>
+          </Button>
+          <Button variant="outline" onPress={() => {}} className="border">
+            <ButtonText>Secondary Button</ButtonText>
+          </Button>
         </View>
       </View>
     </ScrollView>

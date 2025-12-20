@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
-import { View, ActivityIndicator, Text } from "react-native";
+import { ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AuthLayout } from "@components/layouts/AuthLayout";
-import { useVerifyToken } from "@api/queries/useVerifyToken";
-import { useAuthStore } from "@store/useAuthStore";
-import { useTranslation } from "@hooks/useTranslation";
-import { ROUTES } from "@navigation/routes";
-import type { AuthNavigationProp } from "@navigation/types";
+import { ScreenLayout } from "@app/components/layouts/ScreenLayout";
+import { Box, Text } from "@app/components/ui";
+import { useVerifyToken } from "@app/api/queries/useVerifyToken";
+import { useAuthStore } from "@app/store/useAuthStore";
+import { useTranslation } from "@app/hooks/useTranslation";
+import { ROUTES } from "@app/navigation/routes";
+import { COLORS } from "@app/config/design-tokens";
+import type { AuthNavigationProp } from "@app/navigation/types";
 
 export const SplashScreen = () => {
   const navigation = useNavigation<AuthNavigationProp>();
@@ -35,14 +37,16 @@ export const SplashScreen = () => {
   }, [token, data, isError, logout, navigation]);
 
   return (
-    <AuthLayout>
-      <View className="items-center">
+    <ScreenLayout>
+      <Box className="flex-1 justify-center items-center">
         <Text className="text-3xl font-bold mb-8 text-center">
           {t("app.name")}
         </Text>
-        <ActivityIndicator size="large" color="#3B82F6" />
-        <Text className="text-gray-500 mt-4">{t("auth.splash.verifying")}</Text>
-      </View>
-    </AuthLayout>
+        <ActivityIndicator size="large" color={COLORS.primary} />
+        <Text className="text-typography-500 mt-4">
+          {t("auth.splash.verifying")}
+        </Text>
+      </Box>
+    </ScreenLayout>
   );
 };

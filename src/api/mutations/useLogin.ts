@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { apiClient } from "@api/client";
-import { API_ENDPOINTS } from "@api/endpoints";
-import { useAuthStore } from "@store/useAuthStore";
-import type { LoginRequest, AuthResponse } from "@models/api.types";
+import { apiClient } from "@app/api/client";
+import { API_ENDPOINTS } from "@app/api/endpoints";
+import { useAuthStore } from "@app/store/useAuthStore";
+import type { LoginRequest, AuthResponse } from "@app/types/api.types";
 
 export const useLogin = () => {
   const setAuth = useAuthStore((state) => state.setAuth);

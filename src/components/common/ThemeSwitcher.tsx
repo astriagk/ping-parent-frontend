@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { useTheme } from "@hooks/useTheme";
-import type { ThemeMode } from "@store/useThemeStore";
+import { useTheme } from "@app/hooks/useTheme";
+import type { ThemeMode } from "@app/store/useThemeStore";
 
 export const ThemeSwitcher: React.FC = () => {
   const { theme, setTheme, toggleTheme, isDark } = useTheme();

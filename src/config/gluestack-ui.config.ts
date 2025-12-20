@@ -1,5 +1,3 @@
-import { createConfig } from "@gluestack-style/react";
-
 // Light Theme Colors
 export const lightTheme = {
   primary: "#3B82F6", // Blue
@@ -47,39 +45,3 @@ export const darkTheme = {
 
   shadow: "rgba(0, 0, 0, 0.3)",
 };
-
-export const config = createConfig({
-  aliases: {
-    bg: "backgroundColor",
-    bgColor: "backgroundColor",
-    h: "height",
-    w: "width",
-    p: "padding",
-    px: "paddingHorizontal",
-    py: "paddingVertical",
-    pt: "paddingTop",
-    pb: "paddingBottom",
-    pl: "paddingLeft",
-    pr: "paddingRight",
-    m: "margin",
-    mx: "marginHorizontal",
-    my: "marginVertical",
-    mt: "marginTop",
-    mb: "marginBottom",
-    ml: "marginLeft",
-    mr: "marginRight",
-  } as const,
-  tokens: {
-    colors: lightTheme,
-    space: {},
-    borderWidths: {},
-    radii: {},
-    breakpoints: {},
-    mediaQueries: {},
-    letterSpacings: {},
-    lineHeights: {},
-    fontWeights: {},
-    fonts: {},
-    fontSizes: {},
-  },
-});
