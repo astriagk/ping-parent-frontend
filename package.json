@@ -7,13 +7,36 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "eslint .",
-    "type-check": "tsc --noEmit"
+    "start:dev": "cross-env EXPO_PUBLIC_ENV=development expo start",
+    "start:uat": "cross-env EXPO_PUBLIC_ENV=uat expo start",
+    "start:prod": "cross-env EXPO_PUBLIC_ENV=production expo start",
+    "android:dev": "cross-env EXPO_PUBLIC_ENV=development expo start --android",
+    "android:uat": "cross-env EXPO_PUBLIC_ENV=uat expo start --android",
+    "android:prod": "cross-env EXPO_PUBLIC_ENV=production expo start --android",
+    "ios:dev": "cross-env EXPO_PUBLIC_ENV=development expo start --ios",
+    "ios:uat": "cross-env EXPO_PUBLIC_ENV=uat expo start --ios",
+    "ios:prod": "cross-env EXPO_PUBLIC_ENV=production expo start --ios",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "type-check": "tsc --noEmit",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
-    "@gluestack-style/react": "^1.0.57",
-    "@gluestack-ui/config": "^1.1.20",
-    "@gluestack-ui/themed": "^1.1.18",
+    "@expo/html-elements": "^0.10.1",
+    "@gluestack-ui/core": "^3.0.10",
+    "@gluestack-ui/utils": "^3.0.11",
+    "@legendapp/motion": "^2.3.0",
     "@react-native-aria/checkbox": "^0.2.10",
     "@react-native-aria/dialog": "^0.0.5",
     "@react-native-aria/focus": "^0.2.9",
@@ -30,14 +53,20 @@
     "@tanstack/react-query": "^5.17.9",
     "axios": "^1.6.5",
     "expo": "~54.0.0",
+    "nativewind": "^4.1.23",
     "react": "19.1.0",
+    "react-aria": "^3.33.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.49.3",
     "react-native": "0.81.5",
-    "react-native-safe-area-context": "~5.6.0",
+    "react-native-reanimated": "~4.1.0",
+    "react-native-safe-area-context": "^5.6.1",
     "react-native-screens": "~4.16.0",
-    "react-native-svg": "15.12.1",
+    "react-native-svg": "^15.13.0",
+    "react-native-worklets": "^0.5.1",
     "react-native-worklets-core": "^1.6.2",
+    "react-stately": "^3.39.0",
+    "tailwind-variants": "^0.1.20",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
@@ -45,11 +74,23 @@
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@babel/plugin-proposal-private-methods": "^7.18.6",
+    "@eslint/js": "^9.39.2",
     "@types/react": "~19.1.10",
-    "babel-plugin-module-resolver": "^5.0.2",
-    "nativewind": "^4.2.1",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.3.3"
+    "@typescript-eslint/eslint-plugin": "^8.50.0",
+    "@typescript-eslint/parser": "^8.50.0",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^8.50.0"
   },
   "private": true
 }

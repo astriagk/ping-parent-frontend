@@ -1,12 +1,11 @@
-import React from "react";
-import { GluestackUIProvider } from "@gluestack-ui/themed";
+import React, { useEffect } from "react";
+import "@/global.css";
+import { GluestackUIProvider } from "@app/components/ui";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useColorScheme } from "react-native";
-import { RootNavigator } from "./navigation/RootNavigator";
-import { config } from "./config/gluestack-ui.config";
-import { useThemeStore } from "./store/useThemeStore";
-import { useEffect } from "react";
+import { RootNavigator } from "@app/navigation/RootNavigator";
+import { useThemeStore } from "@app/store/useThemeStore";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,7 +31,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        <GluestackUIProvider config={config} colorMode={colorScheme}>
+        <GluestackUIProvider mode={colorScheme as "light" | "dark"}>
           <RootNavigator />
         </GluestackUIProvider>
       </QueryClientProvider>

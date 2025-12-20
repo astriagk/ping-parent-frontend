@@ -1,3 +1,8 @@
-export const API_BASE_URL =
-  process.env.EXPO_PUBLIC_API_URL || "http://localhost:3000/api";
-export const APP_ENV = process.env.EXPO_PUBLIC_ENV || "development";
+export {
+  API_BASE_URL,
+  APP_ENV,
+  ENV_NAME,
+  DEBUG,
+  API_TIMEOUT,
+  ENABLE_LOGGING,
+} from "../../environment";

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { User } from "../types/models";
+import type { User } from "@app/types/models";
 
 interface UserState {
   users: User[];
