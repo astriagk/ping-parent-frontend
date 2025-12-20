@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { ScreenLayout } from "@app/components/layouts/ScreenLayout";
 import { Box, Text } from "@app/components/ui";
 import { useVerifyToken } from "@app/api/queries/useVerifyToken";
 import { useAuthStore } from "@app/store/useAuthStore";
@@ -37,16 +36,14 @@ export const SplashScreen = () => {
   }, [token, data, isError, logout, navigation]);
 
   return (
-    <ScreenLayout>
-      <Box className="flex-1 justify-center items-center">
-        <Text className="text-3xl font-bold mb-8 text-center">
-          {t("app.name")}
-        </Text>
-        <ActivityIndicator size="large" color={COLORS.primary} />
-        <Text className="text-typography-500 mt-4">
-          {t("auth.splash.verifying")}
-        </Text>
-      </Box>
-    </ScreenLayout>
+    <Box className="flex-1 justify-center items-center">
+      <Text className="text-3xl font-bold mb-8 text-center">
+        {t("app.name")}
+      </Text>
+      <ActivityIndicator size="large" color={COLORS.primary} />
+      <Text className="text-typography-500 mt-4">
+        {t("auth.splash.verifying")}
+      </Text>
+    </Box>
   );
 };

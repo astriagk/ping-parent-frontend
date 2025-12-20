@@ -77,7 +77,7 @@ export const LoginForm: React.FC = () => {
             },
           }}
           render={({ field: { onChange, value } }) => (
-            <Input className={errors.phone ? "border-error-500" : ""}>
+            <Input size="lg" className={errors.phone ? "border-error-500" : ""}>
               <InputField
                 value={value}
                 onChangeText={onChange}
@@ -96,6 +96,7 @@ export const LoginForm: React.FC = () => {
 
       {!otpSent ? (
         <Button
+          size="lg"
           onPress={onSendOTP}
           isDisabled={!phone || !!errors.phone || sendOTPMutation.isPending}
         >
@@ -125,7 +126,10 @@ export const LoginForm: React.FC = () => {
                 },
               }}
               render={({ field: { onChange, value } }) => (
-                <Input className={errors.otp ? "border-error-500" : ""}>
+                <Input
+                  size="lg"
+                  className={errors.otp ? "border-error-500" : ""}
+                >
                   <InputField
                     value={value}
                     onChangeText={onChange}
@@ -144,6 +148,7 @@ export const LoginForm: React.FC = () => {
           </Box>
 
           <Button
+            size="lg"
             onPress={handleSubmit(onVerifyOTP)}
             isDisabled={verifyOTPMutation.isPending}
           >
@@ -155,6 +160,7 @@ export const LoginForm: React.FC = () => {
           </Button>
 
           <Button
+            size="lg"
             onPress={() => {
               setOtpSent(false);
               setDevOTP("");
