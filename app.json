@@ -1,4 +1,25 @@
 {
-  "name": "pingParentFrontend",
-  "displayName": "pingParentFrontend"
+  "expo": {
+    "name": "pp-frontend-v2",
+    "slug": "pp-frontend-v2",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.astria.ppfrontend"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.astria.ppfrontend"
+    },
+    "web": {}
+  }
 }
