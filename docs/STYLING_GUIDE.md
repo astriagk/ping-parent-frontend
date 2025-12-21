@@ -100,6 +100,56 @@ className = "gap-4"; // 16px gap
 className = "gap-6"; // 24px gap
 ```
 
+### Colors
+
+```tsx
+// Background colors
+className = "bg-primary-500"; // Primary background
+className = "bg-secondary-500"; // Secondary background
+className = "bg-error-500"; // Error background
+className = "bg-success-500"; // Success background
+className = "bg-white"; // White background
+className = "bg-background-0"; // Theme background
+
+// Text colors
+className = "text-primary-500"; // Primary text
+className = "text-typography-900"; // Primary text color
+className = "text-typography-600"; // Secondary text color
+className = "text-white"; // White text
+className = "text-error-500"; // Error text
+
+// Border colors
+className = "border-primary-500"; // Primary border
+className = "border-error-500"; // Error border
+className = "border-gray-300"; // Gray border
+```
+
+### 🎨 Non-Gluestack Components (Icons, ActivityIndicator, etc.)
+
+For React Native components that don't support Tailwind className, use design tokens:
+
+```tsx
+import { COLORS } from "@app/config/design-tokens";
+import { Menu, User } from "lucide-react-native";
+import { ActivityIndicator } from "react-native";
+
+// ✅ CORRECT - Use COLORS design tokens
+<Menu color={COLORS.white} size={24} />
+<User color={COLORS.primary} size={16} />
+<ActivityIndicator color={COLORS.primary} />
+
+// ❌ WRONG - Don't use hardcoded hex values
+<Menu color="#ffffff" size={24} />
+<User color="#3B82F6" size={16} />
+```
+
+Available colors in COLORS:
+
+- `primary`, `secondary`, `success`, `warning`, `error`, `info`
+- `white`, `black`, `gray`
+
+````
+
 ### Typography
 
 ```tsx
@@ -130,7 +180,7 @@ className = "text-typography-900"; // Primary text
 className = "text-typography-500"; // Secondary text
 className = "text-error-500"; // Error text
 className = "text-success-500"; // Success text
-```
+````
 
 ### Colors
 

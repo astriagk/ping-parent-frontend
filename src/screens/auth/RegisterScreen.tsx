@@ -1,6 +1,6 @@
 import React from "react";
-import { Text } from "react-native";
 import { AuthLayout } from "@app/components/layouts/AuthLayout";
+import { PhoneRegistrationForm } from "@app/components/forms/PhoneRegistrationForm";
 import { useTranslation } from "@app/hooks/useTranslation";
 
 export const RegisterScreen = () => {
@@ -8,7 +8,7 @@ export const RegisterScreen = () => {
 
   return (
     <AuthLayout>
-      <Text className="text-2xl font-bold">{t("auth.register.title")}</Text>
+      <PhoneRegistrationForm />
     </AuthLayout>
   );
 };

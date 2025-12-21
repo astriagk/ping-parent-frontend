@@ -12,6 +12,10 @@ import {
 import { useSendOTP } from "@app/api/mutations/useSendOTP";
 import { useVerifyOTP } from "@app/api/mutations/useVerifyOTP";
 import { useTranslation } from "@app/hooks/useTranslation";
+import { useNavigation } from "@react-navigation/native";
+import type { AuthNavigationProp } from "@app/navigation/types";
+import { ROUTES } from "@app/navigation/routes";
+import { getErrorMessage } from "@app/utils/helpers";
 
 interface LoginFormData {
   phone: string;
@@ -28,6 +32,7 @@ export const LoginForm: React.FC = () => {
   const sendOTPMutation = useSendOTP();
   const verifyOTPMutation = useVerifyOTP();
   const { t } = useTranslation();
+  const navigation = useNavigation<AuthNavigationProp>();
   const [otpSent, setOtpSent] = useState(false);
   const [devOTP, setDevOTP] = useState<string>("");
 
@@ -94,6 +99,12 @@ export const LoginForm: React.FC = () => {
         )}
       </Box>
 
+      {sendOTPMutation.isError && (
+        <Text className="text-error-500 text-sm text-center mb-2">
+          {getErrorMessage(sendOTPMutation.error, t("errors.sendOTPFailed"))}
+        </Text>
+      )}
+
       {!otpSent ? (
         <Button
           size="lg"
@@ -147,6 +158,15 @@ export const LoginForm: React.FC = () => {
             )}
           </Box>
 
+          {verifyOTPMutation.isError && (
+            <Text className="text-error-500 text-sm text-center mb-4">
+              {getErrorMessage(
+                verifyOTPMutation.error,
+                t("errors.verifyOTPFailed")
+              )}
+            </Text>
+          )}
+
           <Button
             size="lg"
             onPress={handleSubmit(onVerifyOTP)}
@@ -175,6 +195,19 @@ export const LoginForm: React.FC = () => {
           </Button>
         </>
       )}
+
+      {/* Navigation to Register */}
+      <Box className="mt-6">
+        <Text className="text-center text-typography-600">
+          {t("auth.login.noAccount")}{" "}
+          <Text
+            onPress={() => navigation.navigate(ROUTES.AUTH.REGISTER)}
+            className="text-primary-600 font-semibold"
+          >
+            {t("auth.login.registerLink")}
+          </Text>
+        </Text>
+      </Box>
     </VStack>
   );
 };

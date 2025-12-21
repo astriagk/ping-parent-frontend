@@ -1,17 +1,17 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { HomeScreen } from "@app/screens/home/HomeScreen";
 import { ProfileScreen } from "@app/screens/profile/ProfileScreen";
 import { ROUTES } from "./routes";
 import type { MainStackParamList } from "./types";
 
-const Stack = createNativeStackNavigator<MainStackParamList>();
+const Drawer = createDrawerNavigator<MainStackParamList>();
 
 export const MainNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name={ROUTES.MAIN.HOME} component={HomeScreen} />
-      <Stack.Screen name={ROUTES.MAIN.PROFILE} component={ProfileScreen} />
-    </Stack.Navigator>
+    <Drawer.Navigator screenOptions={{ headerShown: false }}>
+      <Drawer.Screen name={ROUTES.MAIN.HOME} component={HomeScreen} />
+      <Drawer.Screen name={ROUTES.MAIN.PROFILE} component={ProfileScreen} />
+    </Drawer.Navigator>
   );
 };

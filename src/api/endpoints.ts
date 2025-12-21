@@ -11,5 +11,9 @@ export const API_ENDPOINTS = {
     ME: "/auth/me",
     SEND_OTP: "/auth/login/send-otp",
     VERIFY_OTP: "/auth/login/verify-otp",
+    // Phone-based registration endpoints
+    REGISTER_SEND_OTP: "/auth/register/send-otp",
+    REGISTER_VERIFY_OTP: "/auth/register/verify-otp",
+    REGISTER_COMPLETE: "/auth/register/complete",
   },
 } as const;

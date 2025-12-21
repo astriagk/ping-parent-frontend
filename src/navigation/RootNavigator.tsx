@@ -9,11 +9,18 @@ import { MainNavigator } from "./MainNavigator";
 export const RootNavigator = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
+  // Temporarily force show auth navigator for development
+  const showAuthNavigator = false;
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Box className="flex-1 bg-background-0">
         <NavigationContainer>
-          {isAuthenticated ? <MainNavigator /> : <AuthNavigator />}
+          {showAuthNavigator || !isAuthenticated ? (
+            <AuthNavigator />
+          ) : (
+            <MainNavigator />
+          )}
         </NavigationContainer>
       </Box>
     </SafeAreaView>

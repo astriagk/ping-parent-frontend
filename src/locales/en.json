@@ -13,10 +13,29 @@
       "resendOTP": "Change Phone Number",
       "devOTP": "Dev OTP",
       "button": "Login",
-      "loading": "Loading..."
+      "loading": "Loading...",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Register here"
     },
     "register": {
-      "title": "Register Screen"
+      "title": "Create Account",
+      "enterPhone": "Enter your phone number to get started",
+      "phonePlaceholder": "+1234567890",
+      "sendOTP": "Send OTP",
+      "enterOTP": "Verify Your Phone Number",
+      "otpSentTo": "We sent a code to",
+      "otpPlaceholder": "Enter 6-digit code",
+      "verifyOTP": "Verify Code",
+      "changePhone": "Change Phone Number",
+      "completeProfile": "Complete Your Profile (Optional)",
+      "firstNamePlaceholder": "First Name (Optional)",
+      "lastNamePlaceholder": "Last Name (Optional)",
+      "emailPlaceholder": "Email Address (Optional)",
+      "addressPlaceholder": "Address (Optional)",
+      "complete": "Complete Registration",
+      "skipForNow": "Skip for Now",
+      "alreadyHaveAccount": "Already have an account?",
+      "loginLink": "Login here"
     },
     "splash": {
       "verifying": "Verifying your session..."
@@ -29,6 +48,16 @@
     "phoneRequired": "Phone number is required",
     "phoneInvalid": "Invalid phone number format (e.g., +1234567890)",
     "otpRequired": "OTP is required",
-    "otpInvalid": "OTP must be 6 digits"
+    "otpInvalid": "OTP must be 6 digits",
+    "firstNameRequired": "First name is required",
+    "firstNameTooShort": "First name must be at least 2 characters",
+    "lastNameRequired": "Last name is required",
+    "lastNameTooShort": "Last name must be at least 2 characters",
+    "sendOTPFailed": "Failed to send OTP. Please try again.",
+    "verifyOTPFailed": "Failed to verify OTP. Please check the code and try again.",
+    "registrationFailed": "Registration failed. Please try again."
+  },
+  "common": {
+    "loading": "Loading..."
   }
 }
