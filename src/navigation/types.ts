@@ -18,6 +18,7 @@ export type AuthRouteProp<T extends keyof AuthStackParamList> = RouteProp<
 export type MainStackParamList = {
   Home: undefined;
   Profile: { userId?: string };
+  Settings: undefined;
 };
 
 export type MainNavigationProp = NativeStackNavigationProp<MainStackParamList>;

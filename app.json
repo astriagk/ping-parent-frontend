@@ -20,6 +20,11 @@
       },
       "package": "com.astria.ppfrontend"
     },
-    "web": {}
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "968d691a-44f9-4712-b6cc-099f7952db65"
+      }
+    }
   }
 }

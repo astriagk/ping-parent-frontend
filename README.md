@@ -108,6 +108,10 @@ When you commit code, the pre-commit hook will automatically:
 
 This ensures all committed code meets quality standards.
 
+## Build for Android
+
+See step-by-step instructions in [docs/BUILD_ANDROID.md](docs/BUILD_ANDROID.md).
+
 ## License
 
 Private

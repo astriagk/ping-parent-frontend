@@ -7,7 +7,7 @@ interface AuthLayoutProps {
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-background-0">
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         className="flex-1"

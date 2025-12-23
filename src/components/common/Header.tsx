@@ -18,21 +18,16 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <Box className="px-2 py-2 bg-primary-600 shadow-md">
       <HStack className="items-center justify-between">
-        {/* Hamburger Menu */}
-        <TouchableOpacity
-          onPress={() => navigation.openDrawer()}
-          className="p-2"
-        >
-          <Menu color={COLORS.white} size={24} />
-        </TouchableOpacity>
-
         {/* Title */}
         <Text className="text-xl font-bold text-white flex-1 text-center">
           {title}
         </Text>
 
         {/* Profile Image */}
-        <TouchableOpacity className="p-2">
+        <TouchableOpacity
+          onPress={() => navigation.openDrawer()}
+          className="p-2"
+        >
           {user?.avatar ? (
             <Image
               source={{ uri: user.avatar }}
