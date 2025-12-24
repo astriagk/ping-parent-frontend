@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "@/global.css";
 import { GluestackUIProvider } from "@app/components/ui";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useColorScheme } from "react-native";
 import { RootNavigator } from "@app/navigation/RootNavigator";
 import { useThemeStore } from "@app/store/useThemeStore";
@@ -29,12 +28,10 @@ export default function App() {
   }, [theme, systemColorScheme, setColorScheme]);
 
   return (
-    <SafeAreaProvider>
-      <QueryClientProvider client={queryClient}>
-        <GluestackUIProvider mode={colorScheme as "light" | "dark"}>
-          <RootNavigator />
-        </GluestackUIProvider>
-      </QueryClientProvider>
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <GluestackUIProvider mode={colorScheme as "light" | "dark"}>
+        <RootNavigator />
+      </GluestackUIProvider>
+    </QueryClientProvider>
   );
 }

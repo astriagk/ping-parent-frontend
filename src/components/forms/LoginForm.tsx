@@ -87,6 +87,7 @@ export const LoginForm: React.FC = () => {
                 value={value}
                 onChangeText={onChange}
                 placeholder={t("auth.login.phone")}
+                keyboardType="number-pad"
                 editable={!otpSent}
               />
             </Input>

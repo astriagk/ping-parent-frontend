@@ -31,7 +31,7 @@ export const SplashScreen = () => {
     // If token verification failed
     if (isError || (data && !data?.data?.tokenValid)) {
       logout();
-      navigation.replace(ROUTES.AUTH.LOGIN);
+      // Don't navigate - RootNavigator will automatically show AuthNavigator
     }
   }, [token, data, isError, logout, navigation]);
 

@@ -16,4 +16,8 @@ export const API_ENDPOINTS = {
     REGISTER_VERIFY_OTP: "/auth/register/verify-otp",
     REGISTER_COMPLETE: "/auth/register/complete",
   },
+  PARENT: {
+    PROFILE: "/parent/profile",
+    ADDRESS: "/parent/address",
+  },
 } as const;

@@ -23,3 +23,6 @@ export {
   FormControlLabelText,
 } from "./form-control";
 export { GluestackUIProvider } from "./gluestack-ui-provider";
+export { Avatar, AvatarImage, AvatarFallbackText } from "./avatar";
+export { Alert, AlertIcon, AlertText } from "./alert";
+export { Toast, ToastTitle, ToastDescription, useToast } from "./toast";

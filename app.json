@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "pp-frontend-v2",
-    "slug": "pp-frontend-v2",
+    "name": "pp-frontend",
+    "slug": "pp-frontend",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",

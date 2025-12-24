@@ -109,7 +109,7 @@ export const PhoneRegistrationForm: React.FC = () => {
       },
       {
         onSuccess: (response) => {
-          setAuth(response.data.token, response.data.user);
+          setAuth(response.data.token);
         },
       }
     );
@@ -123,7 +123,7 @@ export const PhoneRegistrationForm: React.FC = () => {
       },
       {
         onSuccess: (response) => {
-          setAuth(response.data.token, response.data.user);
+          setAuth(response.data.token);
         },
       }
     );

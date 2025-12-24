@@ -24,4 +24,8 @@ export const QUERY_KEYS = {
     LIST: ["posts", "list"] as const,
     DETAIL: (id: string) => ["posts", "detail", id] as const,
   },
+  PARENT: {
+    PROFILE: ["parent", "profile"] as const,
+    ADDRESS: ["parent", "address"] as const,
+  },
 } as const;
